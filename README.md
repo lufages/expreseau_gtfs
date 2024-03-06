@@ -66,7 +66,32 @@ Arguments obligatoires :
 
 ### Obtenir les services exceptés
 
+```python
+gf.services_exceptes(date_demandee="20240503")
+```
+Renvoit la liste des services exceptés issus du fichier *calendar_dates*.\
+Arguments obligatoires :
+   -  date_demandee : *string* au format 'yyyymmdd'
+
 ### Obtenir la fréquence par segments 
+```python
+gf.frequence_par_segment(date_demandee="20240503", plage_horaire=[7,9], coords=False)
+```
+Renvoit un geodataframe des segments (arrêt à arrêt) avec leur fréquence moyenne et nombre de passages sur la plage horaire spécifiée.\
+Arguments obligatoires :
+   -  date_demandee : *string* au format 'yyyymmdd'
+   -  plage_horaire : liste de *int* spécifiant un intervalle fermé des heures définissant la plage.
+
+Arguments facultatifs :
+   - coords : *bool*. Par défaut *False*. Utile uniquement lorsqu'on souhaite utiliser les fonctions de découpage automatique des lignes de la classe sections()
+
+Résultats :
+segment |	route_short_name |	direction_id 	| trip_id 	|geometry
+:---:	|        :---:     |       :---:   |      :---:    | :---:
+3377704015495197 - 3377704015496264 	|7 	|1 |	1 	| LINESTRING (3.08435 45.79290, 3.08545 45.79590)
+3377704015495198 - 3377704015495857 	|7 	|0 |	2 	| LINESTRING (3.08430 45.79300, 3.08425 45.78970)
+3377704015495200 - 3377704015495637 	|20 	|1 |	7 	| LINESTRING (3.16119 45.79180, 3.14478 45.79260)
+etc ... | ... |...|...|...
 
 ### Obtenir le tracés des lignes
 
@@ -107,22 +132,43 @@ geo_lignes.plot()
 ```python
 gf.frequence_par_shapes(date_demandee='20240305', plage_horaire=[7,9], stop_sequence = 1)
 ```
-Renvoit un geodataframe avec pour chaque trip_id une géométrie associée. **La géométrie n'a pas de CRS.**
+Renvoit un geodataframe avec pour chaque trip_id une géométrie associée. **La géométrie n'a pas de CRS.**\
 Arguments obligatoires :
    -  date_demandee : *string* au format 'yyyymmdd'
-   -  plage_horaire : liste de *int* spécifiant un intervalle fermé des heures définissant la plage.
+   -  plage_horaire : liste de *int* spécifiant un intervalle fermé des heures définissant la plage.\
 Arguments facultatifs :
    - stop_sequence : *int*. Par défaut on calcule la fréquence à partir de la fréquence de passage à l'arrêt numéroté 1. Attention cette méthode n'est pas idéale dans le cas où la fréquence varie selon le tronçon de ligne concerné. Le cas échéant, il sera nécessaire d'utiliser les méthodes de la classe sections().
 ```python
 # on charge la fréquence par shape : 
 fsh = gf.frequence_par_shapes(date_demandee='20240305', plage_horaire=[7,9])
 # on fusionne avec le gdf des shapes créé en amont :
-geo_lignes.merge(fsh, on = "shape_id").sort_values(by='mean_headway', ascending=False).\
+geo_lignes_fsh = geo_lignes.merge(fsh, on = "shape_id")
+```
+On trace la fréquence moyenne par shape :
+```python
+geo_lignes_fsh.sort_values(by='mean_headway', ascending=False).\
 plot(column = "mean_headway", cmap = "viridis", legend = True, scheme = "natural_breaks")
 ```
-On trace la fréquence moyenne par shape :\
 ![Sans titre](https://github.com/lufages/expreseau_gtfs/assets/113050391/48f3a6d2-6371-400c-8a95-1fdf4a354826)
 
 
 ### Tracer l'évolution journalière de l'offre, heure par heure
+
+```python
+gf.plot_evol_journaliere(date_demandee="20240305", y_axe_1="nombre de voyages totaux",
+                        liste_ligne_a_tracer=['A', 'B', 'C', "3", "4"],
+                         y_axe_2="nombre de voyages par ligne spécifiée",
+                        titre = "évolution journalière de l'offre", x_axe = "tranches horaires")
+```
+Renvoit un graphique matplotlib avec l'évolution de l'offre d'une part sur l'ensemble du réseau et d'autre part, si spécifié, l'évolution de l'offre sur certaines lignes.\
+Arguments obligatoires :
+   -  date_demandee : *string* au format 'yyyymmdd'.\
+Arguments facultatifs :
+   - liste_lignes_a_tracer : *list()*. Liste des lignes que l'on souhaite observer.
+   - y_axe_2 : *string*. Nom du second axe y (à droite).
+   - y_axe_1 : *string*. Nom du premier axe y (à gauche). C'est l'évolution de l'ensemble des lignes, mais l'argument n'a pas de valeur pas défaut.
+   - titre : *string*. Titre du graphique.
+   - x_axe : *string* . Nom de l'axe des x.\
+Résultats:\
+![Sans titre](https://github.com/lufages/expreseau_gtfs/assets/113050391/6adf0159-db0b-4d9b-b289-35f0101806f6)
 
