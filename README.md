@@ -86,7 +86,7 @@ Arguments facultatifs :
    - coords : *bool*. Par défaut *False*. Utile uniquement lorsqu'on souhaite utiliser les fonctions de découpage automatique des lignes de la classe sections()
 
 Résultats :
-segment |	route_short_name |	direction_id 	| trip_id 	|geometry
+segment |	route_short_name |	direction_id 	| nbtrips 	|geometry
 :---:	|        :---:     |       :---:   |      :---:    | :---:
 3377704015495197 - 3377704015496264 	|7 	|1 |	1 	| LINESTRING (3.08435 45.79290, 3.08545 45.79590)
 3377704015495198 - 3377704015495857 	|7 	|0 |	2 	| LINESTRING (3.08430 45.79300, 3.08425 45.78970)
