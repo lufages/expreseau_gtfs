@@ -1,6 +1,10 @@
 # expreseau_gtfs
 **EXP**loration des **RESEAU**x de transports en commun avec **GTFS**\
 Outils pour la manipulation et l'exploration des données gtfs pour l'analyse de la performance des réseaux de transports en commun.
+
+maj : 03/2024
+version 0.1 encore au /!\ ***stade de développement*** /!\
+
 ### Classe gtfs_feed()
 Le fichier analyses.py contient la classe gtfs_feed. L'objet gtfs_feed(fichiers *.zip gtfs) contient une séries de fonctions pour analyser la performances de lignes selon plusieurs indicateurs d'offres.
 ### Classe sections()
