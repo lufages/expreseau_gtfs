@@ -12,4 +12,8 @@ Le fichier sections contient la classe sections. L'objet sections() permet de d�
 La fonction sections.decoupe_auto() permet également de détecter les séparations et jonctions de lignes.
 
 
+### installation du package :
+  1. Dans le dossier ~/expreseau_gtfs/dist récupérer l'archive *.tar.gz
+  2. Avec pip : pip install ~/mondossier/*.tar.gz
+
 
