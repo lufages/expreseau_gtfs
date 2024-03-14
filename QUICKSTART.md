@@ -1,6 +1,15 @@
 # Quickstart
-
-[Tracer l'évolution journalière de l'offre](#plotevol)
+## Table des matières
+usage basique :
+  1. [Charger un fichier gtfs au format *.zip](#chargergtfs)
+  2. [Obtenir la fréquence par ligne du jour demandé](#frligne)
+  3. [Obtenir la table horaire du jour demandé](#tabhor)
+  4. [Obtenir l'amplitude par ligne au jour demandé](#ampligne)
+  5. [Obtenir les services exceptés](#servex)
+  6. [Obtenir la fréquence par segments](#frseg)
+  7. [Obtenir le tracés des lignes](#trclignes)
+  8. [Obtenir la fréquence par *shape*](#frshp)
+  9. [Tracer l'évolution journalière de l'offre](#plotevol)
 
 
 ### Charger un fichier gtfs au format *.zip <a id="chargergtfs"></a>
@@ -20,7 +29,7 @@ Ainsi, on peut avoir accès, d'une part à tous les fichiers *.txt contenus dans
 
 et d'autre part un ensemble de méthodes qui permettent de calculer des indicateurs de performances du réseau.
 
-### Obtenir la fréquence par ligne du jour demandé
+### Obtenir la fréquence par ligne du jour demandé <a id="frligne"></a>
 ```python
 gf.frequence_par_ligne(date_demandee="20240305", plage_horaire=[7,8])
 ```
@@ -38,7 +47,7 @@ route_short_name|  direction_id|  nbtrips|  mean_headway
 
 **Remarques :** *nbtrips* et *mean_headway* sont respectivement le nombre de voyages moyens sur la période et la fréquence moyenne.
 
-### Obtenir la table horaire du jour demandé
+### Obtenir la table horaire du jour demandé <a id="tabhor"></a>
 
 ```python
 gf.table_horaire_jour_demande(date_demandee="20240305", plage_horaire=[7,8])
@@ -48,7 +57,7 @@ Arguments obligatoires :
    -  date_demandee : *string* au format 'yyyymmdd'
    -  plage_horaire : liste de *int* spécifiant un intervalle fermé des heures définissant la plage.
 
-### Obtenir l'amplitude par ligne
+### Obtenir l'amplitude par ligne au jour demandé <a id="ampligne"></a>
 Renvoit un dataframe avec l'amplitude (1er départ - dernière arrivée) horaire par ligne : 
 ```python
 gf.amplitude_par_ligne(date_demandee="20240305")
@@ -57,7 +66,7 @@ Arguments obligatoires :
    -  date_demandee : *string* au format 'yyyymmdd'
 
 
-### Obtenir les services exceptés
+### Obtenir les services exceptés <a id="servex"></a>
 
 ```python
 gf.services_exceptes(date_demandee="20240503")
@@ -66,7 +75,7 @@ Renvoit la liste des services exceptés issus du fichier *calendar_dates*.\
 Arguments obligatoires :
    -  date_demandee : *string* au format 'yyyymmdd'
 
-### Obtenir la fréquence par segments 
+### Obtenir la fréquence par segments <a id="frseg"></a>
 ```python
 gf.frequence_par_segment(date_demandee="20240503", plage_horaire=[7,9], coords=False)
 ```
@@ -86,7 +95,7 @@ segment |	route_short_name |	direction_id 	| nbtrips 	|geometry
 3377704015495200 - 3377704015495637 	|20 	|1 |	7 	| LINESTRING (3.16119 45.79180, 3.14478 45.79260)
 etc ... | ... |...|...|...
 
-### Obtenir le tracés des lignes
+### Obtenir le tracés des lignes <a id="trclignes"></a>
 
 ```python
 gf.traces_des_lignes(date_demandee='20240305', plage_horaire=[7,9])
@@ -120,7 +129,7 @@ geo_lignes.plot()
 ![Sans titre](https://github.com/lufages/expreseau_gtfs/assets/113050391/1aeb9cba-8793-477e-8e47-e40273134348)
 
 
-### Obtenir la fréquence par *shape*
+### Obtenir la fréquence par *shape* <a id="frshp"></a>
 
 ```python
 gf.frequence_par_shapes(date_demandee='20240305', plage_horaire=[7,9], stop_sequence = 1)
