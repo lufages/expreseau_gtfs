@@ -1,45 +1,97 @@
 # Quickstart
 ## Table des matières
 [Pour un usage basique](#usabasique)
-  1. [Charger un fichier gtfs au format *.zip](#chargergtfs)
-  2. [Obtenir la fréquence par ligne du jour demandé](#frligne)
-  3. [Obtenir la table horaire du jour demandé](#tabhor)
-  4. [Obtenir l'amplitude par ligne au jour demandé](#ampligne)
-  5. [Obtenir les services exceptés](#servex)
-  6. [Obtenir la fréquence par segments](#frseg)
-  7. [Obtenir le tracés des lignes](#trclignes)
-  8. [Obtenir la fréquence par *shape*](#frshp)
-  9. [Tracer l'évolution journalière de l'offre](#plotevol)
+  1. [Charger un fichier gtfs au format *.zip](#chargergtfs)\
+      a. [Tracer l'évolution journalière de l'offre](#plotevol)\
+      b. [Obtenir les services exceptés](#servex)\
+      c. [Obtenir la table horaire du jour demandé](#tabhor)
+  2. [Calculer des indicateurs de performances du réseau]\
+      a. [Obtenir la fréquence par ligne du jour demandé](#frligne)\
+      b. [Obtenir l'amplitude par ligne au jour demandé](#ampligne)\
+      c. [Obtenir la fréquence par segments](#frseg)\
+      d. [Obtenir le tracés des lignes](#trclignes)\
+      e. [Obtenir la fréquence par *shape*](#frshp)
+
      
 [Pour un usage avancé](#usaavance)
   1.  [Découpage automatique d'une ligne en tronçons](#decoupauto)\
       a.  [Créer un objet *sections()*](#objsections)
 
-## Pour un usage basique <a id="usabasique"></a>
-### Charger un fichier gtfs au format *.zip <a id="chargergtfs"></a>
-On créé un objet gtfs_feed() à partir du fichier gtfs zippé :
+[Exemples]
 
+## Pour un usage basique <a id="usabasique"></a>
+### Créer un objet *gtfs_feed()* et charger des fichiers gtfs au format *.zip <a id="chargergtfs"></a>
+Dans l'objet *gtfs_feed()* il est nécessaire de renseigner une date ("yyyymmdd") et une plage horaire ([7,9] par exemple)
 ```python
-from expreseau_gtfs.analyses import gtfs_feed
+from expreseau_gtfs.feed import gtfs_feed
 fic = r"~\gtfs_data.zip"
-gf = gtfs_feed(fic)
+date = "20240305"
+plage_horaire = [7,9]
+Feed = gtfs_feed(fic, date = date, plage_horaire = plage_horaire)
 ```
 Ainsi, on peut avoir accès, d'une part à tous les fichiers *.txt contenus dans le répertoire zippé, par exemple les *routes* :
 
+```python
+Feed.routes
+```
   index |          route_id |        agency_id |route_short_name   | route_long_name  |      route_desc | route_type | route_url |route_color |           route_text_color
 ---   |---					|   ---           |       ---         |   ---            |      ---        |   ---      |    ---    |   ---      |   ---
 0  | 11821953316814882 | 6192453782601729 |               3   |         Ligne 3 	|	Ligne Ligne 3   |        3   |     NaN   |   ed6e00   |			FFFFFF
 1  | 11821953316814883 | 6192453782601729 |              31   |        Ligne 31		|	Ligne Ligne 31  |         3  |      NaN  |    9c8cc9		|	FFFFFF  
 
+**Les fichiers sont triés par les services circulants le jour et l'heure spécifiés.** Il est possible de charger des dataframes des fichiers bruts avec la méthode *gtfs_feed.data()* : 
+```python
+Feed.data("trips") # renvoit le fichier brut des trips du répertoire GTFS zippé sous forme de dataframe
+``` 
+
+#### Obtenir la table horaire du jour demandé et de l'heure demandée<a id="tabhor"></a>
+
+```python
+Feed.table_horaire()
+```
+Renvoit la table horaire (passages aux arrêts) des services circulant le jour et l'heure spécifiés.
+
+#### Obtenir les services exceptés <a id="servex"></a>
+
+```python
+gf.services_exceptes()
+```
+Renvoit la liste des services exceptés issus du fichier *calendar_dates*.\
+
+#### Tracer l'évolution journalière de l'offre, heure par heure <a id="plotevol"></a>
+
+```python
+Feed.plot_evol_journaliere()
+```
+Renvoit un graphique matplotlib avec l'évolution de l'offre d'une part sur l'ensemble du réseau et d'autre part, si spécifié, l'évolution de l'offre sur certaines lignes.\
+
+Arguments facultatifs :
+   - liste_lignes_a_tracer : *list()*. Liste des lignes que l'on souhaite observer.
+   - y_axe_2 : *string*. Nom du second axe y (à droite).
+   - y_axe_1 : *string*. Nom du premier axe y (à gauche). C'est l'évolution de l'ensemble des lignes, mais l'argument n'a pas de valeur pas défaut.
+   - titre : *string*. Titre du graphique.
+   - x_axe : *string* . Nom de l'axe des x.\
+Résultats:\
+![Sans titre](https://github.com/lufages/expreseau_gtfs/assets/113050391/6adf0159-db0b-4d9b-b289-35f0101806f6)
+
+
 et d'autre part un ensemble de méthodes qui permettent de calculer des indicateurs de performances du réseau.
 
-### Obtenir la fréquence par ligne du jour demandé <a id="frligne"></a>
+### Calculer des indicateurs de performances du réseau avec l'objet *performances()*
+
+Les opérations qui suivent sont basées sur l'objet *gtfs_feed* définit en amont ainsi les indicateurs seront calculés pour l'heure et le jour spécifiés dans *gtfs_feed*.
+
+On commence par créer un objet performances :
 ```python
-gf.frequence_par_ligne(date_demandee="20240305", plage_horaire=[7,8])
+from expreseau_gtfs.performances import performances
+
+gperf = performances(Feed)
 ```
-Arguments obligatoires :
-   -  date_demandee : *string* au format 'yyyymmdd'
-   -  plage_horaire : liste de *int* spécifiant un intervalle fermé des heures définissant la plage.
+
+#### Obtenir la fréquence par ligne du jour demandé <a id="frligne"></a>
+```python
+gperf.frequence_par_ligne() # rappels : date_demandee="20240305" et plage_horaire=[7,9]
+```
 Ce qui donne :
 
 route_short_name|  direction_id|  nbtrips|  mean_headway
@@ -51,42 +103,11 @@ route_short_name|  direction_id|  nbtrips|  mean_headway
 
 **Remarques :** *nbtrips* et *mean_headway* sont respectivement le nombre de voyages moyens sur la période et la fréquence moyenne.
 
-### Obtenir la table horaire du jour demandé <a id="tabhor"></a>
-
-```python
-gf.table_horaire_jour_demande(date_demandee="20240305", plage_horaire=[7,8])
-```
-Renvoit la table horaire (passages aux arrêts) des services circulant le jour et l'heure spécifiés.
-Arguments obligatoires :
-   -  date_demandee : *string* au format 'yyyymmdd'
-   -  plage_horaire : liste de *int* spécifiant un intervalle fermé des heures définissant la plage.
-
-### Obtenir l'amplitude par ligne au jour demandé <a id="ampligne"></a>
-Renvoit un dataframe avec l'amplitude (1er départ - dernière arrivée) horaire par ligne : 
-```python
-gf.amplitude_par_ligne(date_demandee="20240305")
-```
-Arguments obligatoires :
-   -  date_demandee : *string* au format 'yyyymmdd'
-
-
-### Obtenir les services exceptés <a id="servex"></a>
-
-```python
-gf.services_exceptes(date_demandee="20240503")
-```
-Renvoit la liste des services exceptés issus du fichier *calendar_dates*.\
-Arguments obligatoires :
-   -  date_demandee : *string* au format 'yyyymmdd'
-
 ### Obtenir la fréquence par segments <a id="frseg"></a>
 ```python
-gf.frequence_par_segment(date_demandee="20240503", plage_horaire=[7,9], coords=False)
+gperf.frequence_par_segment(coords=False)
 ```
 Renvoit un geodataframe des segments (arrêt à arrêt) avec leur fréquence moyenne et nombre de passages sur la plage horaire spécifiée.\
-Arguments obligatoires :
-   -  date_demandee : *string* au format 'yyyymmdd'
-   -  plage_horaire : liste de *int* spécifiant un intervalle fermé des heures définissant la plage.
 
 Arguments facultatifs :
    - coords : *bool*. Par défaut *False*. Utile uniquement lorsqu'on souhaite utiliser les fonctions de découpage automatique des lignes de la classe sections()
@@ -99,15 +120,19 @@ segment |	route_short_name |	direction_id 	| nbtrips 	|geometry
 3377704015495200 - 3377704015495637 	|20 	|1 |	7 	| LINESTRING (3.16119 45.79180, 3.14478 45.79260)
 etc ... | ... |...|...|...
 
+
+#### Obtenir l'amplitude par ligne au jour demandé <a id="ampligne"></a>
+Renvoit un dataframe avec l'amplitude (1er départ - dernière arrivée) horaire par ligne : 
+```python
+gperf.amplitude_par_ligne()
+```
+
 ### Obtenir le tracés des lignes <a id="trclignes"></a>
 
 ```python
-gf.traces_des_lignes(date_demandee='20240305', plage_horaire=[7,9])
+gperf.traces_des_lignes()
 ```
 Renvoit un geodataframe avec pour chaque trip_id une géométrie associée. **La géométrie n'a pas de CRS.**
-Arguments obligatoires :
-   -  date_demandee : *string* au format 'yyyymmdd'
-   -  plage_horaire : liste de *int* spécifiant un intervalle fermé des heures définissant la plage.
 
 Résultats :
 trip_id            |                               geometry
@@ -120,10 +145,10 @@ etc ... | ...
 #### Tracer les lignes avec *matplotlib* et *geopandas* :
 ```python
 # on enregistre le gdf dans une variable et on précise le crs avec .set_crs() (ici WGS84)
-geo_lignes = gf.traces_des_lignes(date_demandee='20240305', plage_horaire=[7,9]).set_crs("epsg:4326")
+geo_lignes = gperf.traces_des_lignes().set_crs("epsg:4326")
 # on charge les trips et routes pour récupérer le nom des lignes :
-trips = gf.trips
-routes = gf.routes
+trips = Feed.trips
+routes = Feed.routes
 # on fusionne les fichiers pour obtenir une table des correspondances entre trip_id et route_short_name :
 trips_routes = trips[['trip_id', 'route_id']].merge(routes[["route_id", "route_short_name", "route_color"]], on = 'route_id')
 # on fusionne avec le gdf des lignes :
@@ -136,7 +161,7 @@ geo_lignes.plot()
 ### Obtenir la fréquence par *shape* <a id="frshp"></a>
 
 ```python
-gf.frequence_par_shapes(date_demandee='20240305', plage_horaire=[7,9], stop_sequence = 1)
+gperf.frequence_par_shapes(stop_sequence = 1)
 ```
 Renvoit un geodataframe avec pour chaque trip_id une géométrie associée. **La géométrie n'a pas de CRS.**\
 Arguments obligatoires :
@@ -146,7 +171,7 @@ Arguments facultatifs :
    - stop_sequence : *int*. Par défaut on calcule la fréquence à partir de la fréquence de passage à l'arrêt numéroté 1. Attention cette méthode n'est pas idéale dans le cas où la fréquence varie selon le tronçon de ligne concerné. Le cas échéant, il sera nécessaire d'utiliser les méthodes de la classe sections().
 ```python
 # on charge la fréquence par shape : 
-fsh = gf.frequence_par_shapes(date_demandee='20240305', plage_horaire=[7,9])
+fsh = gperf.frequence_par_shapes()
 # on fusionne avec le gdf des shapes créé en amont :
 geo_lignes_fsh = geo_lignes.merge(fsh, on = "shape_id")
 ```
@@ -158,25 +183,7 @@ plot(column = "mean_headway", cmap = "viridis", legend = True, scheme = "natural
 ![Sans titre](https://github.com/lufages/expreseau_gtfs/assets/113050391/48f3a6d2-6371-400c-8a95-1fdf4a354826)
 
 
-### Tracer l'évolution journalière de l'offre, heure par heure <a id="plotevol"></a>
 
-```python
-gf.plot_evol_journaliere(date_demandee="20240305", y_axe_1="nombre de voyages totaux",
-                        liste_ligne_a_tracer=['A', 'B', 'C', "3", "4"],
-                         y_axe_2="nombre de voyages par ligne spécifiée",
-                        titre = "évolution journalière de l'offre", x_axe = "tranches horaires")
-```
-Renvoit un graphique matplotlib avec l'évolution de l'offre d'une part sur l'ensemble du réseau et d'autre part, si spécifié, l'évolution de l'offre sur certaines lignes.\
-Arguments obligatoires :
-   -  date_demandee : *string* au format 'yyyymmdd'.\
-Arguments facultatifs :
-   - liste_lignes_a_tracer : *list()*. Liste des lignes que l'on souhaite observer.
-   - y_axe_2 : *string*. Nom du second axe y (à droite).
-   - y_axe_1 : *string*. Nom du premier axe y (à gauche). C'est l'évolution de l'ensemble des lignes, mais l'argument n'a pas de valeur pas défaut.
-   - titre : *string*. Titre du graphique.
-   - x_axe : *string* . Nom de l'axe des x.\
-Résultats:\
-![Sans titre](https://github.com/lufages/expreseau_gtfs/assets/113050391/6adf0159-db0b-4d9b-b289-35f0101806f6)
 
 
 ## Pour un usage avancé <a id="usaavance"></a>
@@ -188,7 +195,7 @@ C'est souvent le cas sur certaines lignes de tramways, où, passé un certain ar
 
 #### Créer un objet sections() <a id="objsections"></a>
 
-L'objet *sections()* a besoin d'une table des fréquences par segments en attribut (voir *gtfs_feed().frequences_par_segments()*).\
+L'objet *sections()* a besoin d'une table des fréquences par segments en attribut (voir *performances().frequences_par_segments()*).
 
 ```python
 from expreseau_gtfs.sections import sections
