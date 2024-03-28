@@ -2,8 +2,8 @@
 **EXP**loration des **RESEAU**x de transports en commun avec **GTFS**\
 Outils pour la manipulation et l'exploration des données gtfs pour l'analyse de la performance des réseaux de transports en commun.
 
-maj : 03/2024
-version 0.1 encore au /!\ ***stade de développement*** /!\
+maj : 03/2024 - *modification en cours*
+version 0.2 encore au /!\ ***stade de développement*** /!\
 
 ### Classe gtfs_feed:
 Le fichier feed.py contient la classe gtfs_feed. 
