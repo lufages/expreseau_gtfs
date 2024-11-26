@@ -14,7 +14,7 @@ extensions = [
     'sphinx.ext.napoleon',       # Pour le support des formats Google et NumPy docstrings
     'sphinx.ext.viewcode',       # Pour générer des liens vers le code source dans la doc
     'sphinx.ext.intersphinx',    # Pour lier à la documentation d'autres projets
-    'sphinx_rtd_theme',          # Thème Read the Docs
+    # 'sphinx_rtd_theme',          # Thème Read the Docs
 ]
 
 templates_path = ['_templates']
