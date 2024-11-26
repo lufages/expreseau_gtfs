@@ -1,4 +1,4 @@
-Welcome to My Project's documentation!
+Bienvenue sur la documentation de la librairie EXPRESEAU GTFS
 ======================================
 
 .. toctree::
@@ -8,6 +8,7 @@ Welcome to My Project's documentation!
    introduction
    installation
    guide_utilisateur
+   Quick Start
    api_reference
 
 Indices et tables
