@@ -21,7 +21,7 @@ templates_path = ['_templates']
 exclude_patterns = []  # Vous pouvez exclure certains fichiers ou répertoires si nécessaire
 
 # -- Options for HTML output -------------------------------------------------
-html_theme = 'sphinx_rtd_theme'  # Utilisation du thème Read the Docs
+html_theme = 'alabaster'  # Utilisation du thème Read the Docs
 html_static_path = ['_static']    # Répertoire pour les fichiers statiques (images, CSS, etc.)
 
 # -- Options for autodoc -----------------------------------------------------
