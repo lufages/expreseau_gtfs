@@ -6,9 +6,3 @@ Bienvenue sur la documentation de la librairie EXPRESEAU GTFS
    :caption: Table des matières
 
    QUICKSTART
-
-Indices et tables
-=================
-
-* :ref:`genindex`
-
