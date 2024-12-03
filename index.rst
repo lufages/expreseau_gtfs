@@ -15,5 +15,5 @@ Indices et tables
 =================
 * :ref: `Classes`
 * :ref:`genindex`
-* :ref:`modindex`
+* :ref:`QUICKSTART`
 * :ref:`search`
