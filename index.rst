@@ -13,7 +13,7 @@ Bienvenue sur la documentation de la librairie EXPRESEAU GTFS
 
 Indices et tables
 =================
-
+* :ref: `Classes`
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
