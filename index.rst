@@ -5,15 +5,10 @@ Bienvenue sur la documentation de la librairie EXPRESEAU GTFS
    :maxdepth: 2
    :caption: Table des matières
 
-   introduction
-   installation
-   guide_utilisateur
-   Quick Start
-   Classes
+   QUICKSTART
 
 Indices et tables
 =================
-* :ref: `Classes`
+
 * :ref:`genindex`
-* :ref:`QUICKSTART`
-* :ref:`search`
+
