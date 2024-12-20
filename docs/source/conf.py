@@ -4,10 +4,6 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 # -- Project information -----------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-
-import os
-import sys
 
 # include_html.append('include_html')
 project = "Expreseau GTFS"
@@ -27,17 +23,16 @@ extensions = [
 "myst_parser"    # Pour lier à la documentation d'autres projets
     # 'sphinx_rtd_theme',          # Thème Read the Docs
 ]
-# extensions.append('include_html')
-# extensions.append('html_toc')
 
 templates_path = ['_templates']
-exclude_patterns = []  # Vous pouvez exclure certains fichiers ou répertoires si nécessaire
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']  # Vous pouvez exclure certains fichiers ou répertoires si nécessaire
 # import sphinx_pdj_theme
 html_theme = 'sphinx_rtd_theme'
-# html_theme_path = [sphinx_pdj_theme.get_html_theme_path()]
-# -- Options for HTML output -------------------------------------------------
-# html_theme = 'pdj'  # Utilisation du thème Read the Docs
-html_static_path = ['_static']    # Répertoire pour les fichiers statiques (images, CSS, etc.)
+
+# Répertoire pour les fichiers statiques (images, CSS, etc.)
+html_static_path = ['_static']   
+
+
 # html_extra_path = [r"C:\Users\Lucas\Documents\python_libs_perso\expreseau_gtfs\expreseau_gtfs\build\html\html_extra\QUICKSTART.html"]
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
