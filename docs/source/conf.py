@@ -9,7 +9,7 @@
 project = "Expreseau GTFS"
 copyright = '2024, Lucas FAGES'
 author = 'Lucas FAGES'
-master_doc = 'modules'
+# master_doc = 'modules'
 # -- Project information -----------------------------------------------------
 
 release = '1.0.0'  # Version de votre projet
