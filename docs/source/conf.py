@@ -9,11 +9,6 @@
 import os
 import sys
 
-sys.path.append((r'C:\Users\Lucas\Documents\python_libs_perso\expreseau_gtfs\expreseau_gtfs\source'))
-# print(os.path)
-# import include_html
-# from .extensions import IncludeHTML, setup
-
 # include_html.append('include_html')
 project = "Expreseau GTFS"
 copyright = '2024, Lucas FAGES'
