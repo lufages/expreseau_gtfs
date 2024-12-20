@@ -27,7 +27,7 @@ extensions = [
 "myst_parser"    # Pour lier à la documentation d'autres projets
     # 'sphinx_rtd_theme',          # Thème Read the Docs
 ]
-extensions.append('include_html')
+# extensions.append('include_html')
 # extensions.append('html_toc')
 
 templates_path = ['_templates']
