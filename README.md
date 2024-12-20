@@ -1,6 +1,6 @@
 # expreseau_gtfs
 
-![logo]()
+![logo](docs/icon.png)
 
 **EXP**loration des **RESEAU**x de transports en commun avec **GTFS**\
 Outils pour la manipulation et l'exploration des données gtfs pour l'analyse de la performance des réseaux de transports en commun.
