@@ -1,0 +1,526 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>expreseau_gtfs.performances &mdash; Project name not set 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../modules.html" class="icon icon-home">
+            Project name not set
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../expreseau_gtfs.html">expreseau_gtfs package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../modules.html">Project name not set</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../modules.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">expreseau_gtfs.performances</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for expreseau_gtfs.performances</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">shapely</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">LineString</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">from</span> <span class="nn">expreseau_gtfs.utils</span> <span class="kn">import</span> <span class="n">seconds_to_hms</span>
+<span class="kn">from</span> <span class="nn">expreseau_gtfs.feed</span> <span class="kn">import</span> <span class="n">gtfs_feed</span>
+
+<div class="viewcode-block" id="performances">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances">[docs]</a>
+<span class="k">class</span> <span class="nc">performances</span><span class="p">:</span>    
+    
+<div class="viewcode-block" id="performances.__init__">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Feed</span><span class="p">):</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span> <span class="o">=</span> <span class="n">Feed</span></div>
+
+    
+    
+<div class="viewcode-block" id="performances.frequence_par_ligne">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances.frequence_par_ligne">[docs]</a>
+    <span class="k">def</span> <span class="nf">frequence_par_ligne</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop_sequence</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renvoit la fréquence moyenne par ligne sur la période renseignée dans </span>
+<span class="sd">        l&#39;objet gtfs_feed.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        stop_sequence : int, optional</span>
+<span class="sd">            Détermine à quel numéro d&#39;arrêt de la ligne sera </span>
+<span class="sd">            calculée la fréquence moyenne. Par défaut, stop_sequence = 1.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pandas.dataframe()</span>
+<span class="sd">            Dataframe avec la fréquence par ligne et le temps </span>
+<span class="sd">            d&#39;attente moyen.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_frequence_par_ligne</span><span class="p">(</span><span class="n">stop_sequence</span><span class="p">)</span></div>
+
+    
+
+<div class="viewcode-block" id="performances.amplitude_par_ligne">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances.amplitude_par_ligne">[docs]</a>
+    <span class="k">def</span> <span class="nf">amplitude_par_ligne</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renvoit un dataframe contenant l&#39;heure du premier départ et l&#39;heure de</span>
+<span class="sd">        la dernière arrivée par ligne.        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pandas.dataframe()</span>
+<span class="sd">            Dataframe de l&#39;amplitude par ligne.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_amplitude_par_ligne</span><span class="p">()</span></div>
+
+
+    
+<div class="viewcode-block" id="performances.frequence_par_segment">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances.frequence_par_segment">[docs]</a>
+    <span class="k">def</span> <span class="nf">frequence_par_segment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coords</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renvoit la fréquence moyenne par segments sur la période renseignée dans </span>
+<span class="sd">        l&#39;objet gtfs_feed.        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        coords : bool, optional</span>
+<span class="sd">            Permet d&#39;avoir les coordonnées des segments pour</span>
+<span class="sd">            un post-traitement avec la classe sections. Par défaut, coords = False.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        geopandas.geodataframe()</span>
+<span class="sd">            Fréquence par segment (arrêt à arrêt) et par ligne.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_frequence_par_segment</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="performances.traces_des_lignes">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances.traces_des_lignes">[docs]</a>
+    <span class="k">def</span> <span class="nf">traces_des_lignes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renvoit un geodataframe des tracés des lignes.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        geopandas.geodataframe()</span>
+<span class="sd">            Geodataframe des formes des lignes (shapes.txt) avec le trip_id associé.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_trace_des_lignes</span><span class="p">()</span></div>
+
+
+    
+<div class="viewcode-block" id="performances.frequence_par_shapes">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances.frequence_par_shapes">[docs]</a>
+    <span class="k">def</span> <span class="nf">frequence_par_shapes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop_sequence</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renvoit la fréquence moyenne par shape sur la période renseignée dans </span>
+<span class="sd">        l&#39;objet gtfs_feed.        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        stop_sequence : int, optional</span>
+<span class="sd">            Détermine à quel numéro d&#39;arrêt de la ligne sera </span>
+<span class="sd">            calculée la fréquence moyenne. Par défaut, stop_sequence = 1</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pandas.dataframe()</span>
+<span class="sd">            Dataframe de la fréquence par shape_id.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_frequence_par_shape</span><span class="p">(</span><span class="n">stop_sequence</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="performances.freq_min">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances.freq_min">[docs]</a>
+    <span class="k">def</span> <span class="nf">freq_min</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop_sequence</span> <span class="o">=</span> <span class="mi">8</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pour chaque ligne, calcul de la fréquence moyenne par heure de 7h à 21h.</span>
+<span class="sd">        On récupère la plus mauvaise de ces fréquences pour chauque ligne.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        stop_sequence : int, optional</span>
+<span class="sd">            Par défaut stop_sequence = 8.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">       pandas.dataframe()</span>
+<span class="sd">           Dataframe de la fréquence par minimale.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_freq_min</span><span class="p">(</span><span class="n">stop_sequence</span><span class="p">)</span></div>
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># ########## getters  </span>
+<span class="c1"># </span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="performances._get_freq_min">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances._get_freq_min">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_freq_min</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop_sequence</span><span class="p">):</span>
+        
+        <span class="n">plage_horaire</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span>
+        
+        <span class="c1"># on créé un autre feed sur la base du premier pour élargir les horaires</span>
+        <span class="n">feed_temp</span> <span class="o">=</span> <span class="n">gtfs_feed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">gtfs_path</span><span class="p">,</span>
+                              <span class="n">date</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">date</span><span class="p">,</span>
+                              <span class="n">plage_horaire</span><span class="o">=</span><span class="n">plage_horaire</span><span class="p">,</span>
+                              <span class="n">methode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">methode</span><span class="p">)</span>
+        
+        
+        <span class="c1"># il faut calculer la fréquence par heure de 7h à 21h par ligne</span>
+        <span class="c1"># recupère la table horaire avec les services circulant le jour demandé entre 7h et 21h (par défaut)</span>
+        <span class="n">trips_stops</span> <span class="o">=</span> <span class="n">feed_temp</span><span class="o">.</span><span class="n">table_horaire</span><span class="p">()</span>
+        <span class="c1"># selection des colonnes :</span>
+        <span class="n">trips_stops</span> <span class="o">=</span> <span class="n">trips_stops</span><span class="p">[[</span><span class="s2">&quot;arrival_time&quot;</span><span class="p">,</span><span class="s1">&#39;route_id&#39;</span><span class="p">,</span><span class="s1">&#39;route_short_name&#39;</span><span class="p">,</span> <span class="s1">&#39;trip_id&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;direction_id&#39;</span><span class="p">,</span> <span class="s1">&#39;service_id&#39;</span><span class="p">,</span> <span class="s2">&quot;stop_sequence&quot;</span><span class="p">,</span> <span class="s1">&#39;stop_id&#39;</span><span class="p">]]</span>
+        <span class="c1"># on découpe les &quot;arrival_time&quot; en tranches horaires de 1h</span>
+        <span class="n">trips_stops</span><span class="p">[</span><span class="s1">&#39;arrival_time_&#39;</span><span class="p">]</span> <span class="o">=</span> \
+        <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">trips_stops</span><span class="p">[</span><span class="s1">&#39;arrival_time&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">plage_horaire</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                                    <span class="n">plage_horaire</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="c1"># selection des colonnes</span>
+        <span class="n">trips_stops</span> <span class="o">=</span> <span class="n">trips_stops</span><span class="p">[[</span><span class="s1">&#39;route_short_name&#39;</span><span class="p">,</span><span class="s1">&#39;direction_id&#39;</span><span class="p">,</span> 
+                                   <span class="s1">&#39;arrival_time_&#39;</span><span class="p">,</span> <span class="s2">&quot;stop_sequence&quot;</span><span class="p">]]</span>
+        <span class="c1"># selection d&#39;un arret via le stop_sequence (5 par défaut)</span>
+        <span class="n">trips_stops_</span> <span class="o">=</span> <span class="n">trips_stops</span><span class="p">[</span><span class="n">trips_stops</span><span class="o">.</span><span class="n">stop_sequence</span> <span class="o">==</span> <span class="n">stop_sequence</span><span class="p">]</span>
+        <span class="c1"># on compte le nombre de passage par arret par ligne par direction :</span>
+        <span class="n">trips_stops_</span> <span class="o">=</span> <span class="n">trips_stops_</span>\
+            <span class="o">.</span><span class="n">value_counts</span><span class="p">([</span><span class="s2">&quot;route_short_name&quot;</span><span class="p">,</span><span class="s2">&quot;direction_id&quot;</span><span class="p">,</span><span class="s2">&quot;arrival_time_&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+        <span class="c1"># conversion du nombre de passages en fréquences horaires</span>
+
+        <span class="n">trips_stops_</span><span class="p">[</span><span class="s2">&quot;freq&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">/</span> <span class="n">trips_stops_</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span>
+        <span class="c1">#pour chaque ligne, on regarde sur quelle tranche horaire la fréquence</span>
+        <span class="c1"># est la plus mauvaise :</span>
+        <span class="c1"># instacie liste vide :</span>
+        <span class="n">liste_min_freq</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span> 
+        <span class="c1"># bouclage</span>
+        <span class="k">for</span> <span class="n">rt</span> <span class="ow">in</span> <span class="n">trips_stops_</span><span class="o">.</span><span class="n">route_short_name</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">trips_stops_</span><span class="p">[</span><span class="n">trips_stops_</span><span class="o">.</span><span class="n">route_short_name</span> <span class="o">==</span> <span class="n">rt</span><span class="p">]</span>
+            <span class="n">liste_min_freq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">freq</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+        <span class="c1"># enregistrement dans un pandas dataframe :</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">((</span><span class="n">trips_stops_</span><span class="o">.</span><span class="n">route_short_name</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span> <span class="n">liste_min_freq</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;route_short_name&#39;</span><span class="p">,</span> <span class="s2">&quot;frequence min&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">df</span></div>
+
+
+ 
+<div class="viewcode-block" id="performances._get_frequence_par_segment">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances._get_frequence_par_segment">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_frequence_par_segment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coords</span><span class="p">):</span>
+    
+        <span class="n">stops</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">stops</span>
+        <span class="c1"># extraction de la table horaire :</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">table_horaire</span><span class="p">()</span>
+        <span class="c1"># on réordonne la table par trips et par ordre croissant de stop_sequence</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;trip_id&#39;</span><span class="p">,</span> <span class="s1">&#39;stop_sequence&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># je convertis les stop_id en string pour la fusion :</span>
+        <span class="n">table</span><span class="p">[</span><span class="s2">&quot;stop_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="s2">&quot;stop_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+        <span class="c1"># on créé un décalage d&#39;un arrêt pour chaque trips pour avoir les </span>
+        <span class="c1"># deux poitns d&#39;un segment (arret à arret) :</span>
+        <span class="n">table</span><span class="p">[</span><span class="s1">&#39;end_stop_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;trip_id&quot;</span><span class="p">])[[</span><span class="s1">&#39;stop_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># # nettoyage  des colonnes :</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;route_id&#39;</span><span class="p">,</span>  <span class="s1">&#39;service_id&#39;</span><span class="p">],</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="p">[[</span><span class="s2">&quot;trip_id&quot;</span><span class="p">,</span><span class="s2">&quot;route_short_name&quot;</span><span class="p">,</span><span class="s2">&quot;direction_id&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;arrival_time&quot;</span><span class="p">,</span><span class="s2">&quot;departure_time&quot;</span><span class="p">,</span><span class="s2">&quot;stop_sequence&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;stop_id&quot;</span><span class="p">,</span><span class="s2">&quot;end_stop_id&quot;</span><span class="p">]]</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;trip_id&#39;</span><span class="p">,</span> <span class="s1">&#39;stop_sequence&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        
+        <span class="c1"># Ici, on supprime les arrêts décalé de -1 (shift) qui ont la valeur Nan</span>
+        <span class="c1"># il s&#39;agit en fait d&#39;un arret de fin pour le trip concerné par le shift</span>
+        <span class="c1"># on ne peut donc pas créer de segment et donc je le supprime.</span>
+        <span class="c1"># Au passage on enregistre ces résultats dans un df appelé fréquence :</span>
+        <span class="n">frequence</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;end_stop_id&quot;</span><span class="p">)</span> <span class="c1">#fillna(&#39;fin&#39;)</span>
+        <span class="c1"># On créé les segments en regroupant l&#39;id du stop courant avec le courant + 1 :</span>
+        <span class="n">frequence</span><span class="p">[</span><span class="s2">&quot;segment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">frequence</span><span class="p">[</span><span class="s1">&#39;stop_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span> \
+            <span class="s1">&#39; - &#39;</span> <span class="o">+</span> <span class="n">frequence</span><span class="p">[</span><span class="s1">&#39;end_stop_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+        
+        <span class="n">stops</span><span class="o">.</span><span class="n">stop_id</span> <span class="o">=</span> <span class="n">stops</span><span class="o">.</span><span class="n">stop_id</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+        <span class="c1"># on fusionne pour récupérer les coordonnées des arrêts :</span>
+        <span class="n">frequence</span> <span class="o">=</span> <span class="n">frequence</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">stops</span><span class="p">[[</span><span class="s1">&#39;stop_id&#39;</span><span class="p">,</span> <span class="s1">&#39;stop_lat&#39;</span><span class="p">,</span> <span class="s1">&#39;stop_lon&#39;</span><span class="p">]],</span> <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;stop_id&quot;</span><span class="p">)</span>
+        <span class="n">frequence</span> <span class="o">=</span> <span class="n">frequence</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">stops</span><span class="p">[[</span><span class="s1">&#39;stop_id&#39;</span><span class="p">,</span> <span class="s1">&#39;stop_lat&#39;</span><span class="p">,</span> <span class="s1">&#39;stop_lon&#39;</span><span class="p">]],</span>
+                                    <span class="n">left_on</span> <span class="o">=</span> <span class="s2">&quot;end_stop_id&quot;</span><span class="p">,</span>
+                                    <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;stop_id&#39;</span><span class="p">,</span>
+                                    <span class="n">suffixes</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_dep&#39;</span><span class="p">,</span><span class="s1">&#39;_arr&#39;</span><span class="p">))</span>
+        
+        <span class="c1"># On groupe pour avoir le nombre de service passant par ligne sur </span>
+        <span class="c1"># chaque segment : </span>
+        <span class="n">table_frequences</span> <span class="o">=</span> <span class="n">frequence</span><span class="p">[[</span><span class="s1">&#39;segment&#39;</span><span class="p">,</span> <span class="s2">&quot;route_short_name&quot;</span><span class="p">,</span>
+                                      <span class="s1">&#39;direction_id&#39;</span><span class="p">,</span> <span class="s2">&quot;trip_id&quot;</span><span class="p">,</span><span class="s2">&quot;stop_id_dep&quot;</span><span class="p">,</span>
+                                      <span class="s2">&quot;stop_lon_dep&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_lat_dep&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;stop_id_arr&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_lon_arr&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_lat_arr&quot;</span><span class="p">]]</span>\
+                        <span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;segment&#39;</span><span class="p">,</span> <span class="s2">&quot;route_short_name&quot;</span><span class="p">,</span> <span class="s1">&#39;direction_id&#39;</span><span class="p">,</span>
+                                  <span class="s2">&quot;stop_id_dep&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_lon_dep&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_lat_dep&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;stop_id_arr&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_lon_arr&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_lat_arr&quot;</span><span class="p">])</span>\
+                        <span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+        <span class="c1"># conversion des segments en géométries linestrings :</span>
+        <span class="n">liste_segments</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">table_frequences</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+            <span class="c1"># on recupere les coordonnees :</span>
+            <span class="n">lonx</span> <span class="o">=</span> <span class="n">table_frequences</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">stop_lon_dep</span>
+            <span class="n">latx</span> <span class="o">=</span> <span class="n">table_frequences</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">stop_lat_dep</span>
+            <span class="n">lony</span> <span class="o">=</span> <span class="n">table_frequences</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">stop_lon_arr</span>
+            <span class="n">laty</span> <span class="o">=</span> <span class="n">table_frequences</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">stop_lat_arr</span>
+            <span class="c1"># on convertit les points en geometrie et on stocke dans une liste de lignes</span>
+            <span class="n">liste_segments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">LineString</span><span class="p">([</span><span class="n">Point</span><span class="p">([</span><span class="n">lonx</span><span class="p">,</span> <span class="n">latx</span><span class="p">]),</span>
+                                              <span class="n">Point</span><span class="p">([</span><span class="n">lony</span><span class="p">,</span> <span class="n">laty</span><span class="p">])]))</span>
+        <span class="k">if</span> <span class="n">coords</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">segments_freq</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+                <span class="n">table_frequences</span><span class="p">[[</span><span class="s2">&quot;segment&quot;</span><span class="p">,</span> <span class="s2">&quot;route_short_name&quot;</span><span class="p">,</span> <span class="s2">&quot;direction_id&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;trip_id&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_lon_dep&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_lat_dep&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;stop_lon_arr&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_lat_arr&quot;</span><span class="p">]],</span>
+                <span class="n">geometry</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">(</span><span class="n">liste_segments</span><span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="s1">&#39;epsg:4326&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># on créé un gdf segments_freq</span>
+            <span class="n">segments_freq</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+                <span class="n">table_frequences</span><span class="p">[[</span><span class="s2">&quot;segment&quot;</span><span class="p">,</span> <span class="s2">&quot;route_short_name&quot;</span><span class="p">,</span> <span class="s2">&quot;direction_id&quot;</span><span class="p">,</span> <span class="s2">&quot;trip_id&quot;</span><span class="p">]],</span>
+                <span class="n">geometry</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">(</span><span class="n">liste_segments</span><span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="s1">&#39;epsg:4326&#39;</span><span class="p">))</span>
+        <span class="c1"># on renomme trips_id en nbtrips :</span>
+        <span class="n">segments_freq</span> <span class="o">=</span> <span class="n">segments_freq</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;trip_id&quot;</span><span class="p">:</span><span class="s2">&quot;nbtrips&quot;</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">segments_freq</span></div>
+
+    
+<div class="viewcode-block" id="performances._get_frequence_par_ligne">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances._get_frequence_par_ligne">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_frequence_par_ligne</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop_sequence</span><span class="p">):</span>
+        
+        <span class="n">plage_horaire</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">plage_horaire</span>
+        <span class="n">routes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">routes</span>
+        <span class="c1">#table horaire :</span>
+        <span class="n">trips_stops</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">table_horaire</span><span class="p">()</span>
+        <span class="n">trips_stops</span> <span class="o">=</span> <span class="n">trips_stops</span><span class="p">[[</span><span class="s1">&#39;route_id&#39;</span><span class="p">,</span><span class="s1">&#39;route_short_name&#39;</span><span class="p">,</span> <span class="s1">&#39;trip_id&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;direction_id&#39;</span><span class="p">,</span> <span class="s1">&#39;service_id&#39;</span><span class="p">,</span> <span class="s2">&quot;stop_sequence&quot;</span><span class="p">,</span> <span class="s1">&#39;stop_id&#39;</span><span class="p">]]</span>
+        
+        <span class="c1"># on merge avec la route pour avoir le numéro :</span>
+        <span class="n">trips_stops</span> <span class="o">=</span> <span class="n">trips_stops</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">routes</span><span class="p">[[</span><span class="s2">&quot;route_id&quot;</span><span class="p">,</span> <span class="s2">&quot;route_long_name&quot;</span><span class="p">]],</span>
+                                        <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;route_id&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># on créé un df freq_trips</span>
+        <span class="c1"># on trie sur la stop_sequence 5</span>
+        <span class="n">freq_trips</span> <span class="o">=</span> <span class="n">trips_stops</span><span class="p">[</span><span class="n">trips_stops</span><span class="o">.</span><span class="n">stop_sequence</span> <span class="o">==</span> <span class="n">stop_sequence</span><span class="p">]</span> 
+        <span class="c1"># on ne garde que ces colonnes :</span>
+        <span class="n">freq_trips</span> <span class="o">=</span> <span class="n">freq_trips</span><span class="p">[[</span><span class="s1">&#39;route_id&#39;</span><span class="p">,</span><span class="s1">&#39;route_short_name&#39;</span><span class="p">,</span>
+                                 <span class="s1">&#39;trip_id&#39;</span><span class="p">,</span> <span class="s1">&#39;direction_id&#39;</span><span class="p">,</span> <span class="s1">&#39;service_id&#39;</span><span class="p">]]</span>
+        <span class="c1"># table de contingence pour avoir la fréquence par trip :</span>
+        <span class="n">freq_trips</span> <span class="o">=</span> <span class="n">freq_trips</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">&#39;trip_id&#39;</span><span class="p">,</span> 
+                                            <span class="p">[</span><span class="s1">&#39;direction_id&#39;</span><span class="p">,</span> <span class="s1">&#39;route_short_name&#39;</span><span class="p">],</span>
+                                            <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+        
+        <span class="c1"># renomme les colonnes : </span>
+        <span class="n">freq_trips</span> <span class="o">=</span> <span class="n">freq_trips</span><span class="p">[[</span><span class="s2">&quot;route_short_name&quot;</span><span class="p">,</span><span class="s2">&quot;direction_id&quot;</span><span class="p">,</span> <span class="s2">&quot;trip_id&quot;</span><span class="p">]]</span>
+        <span class="n">freq_trips</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;route_short_name&quot;</span><span class="p">,</span><span class="s2">&quot;direction_id&quot;</span><span class="p">,</span> <span class="s2">&quot;nbtrips&quot;</span><span class="p">]</span>
+        <span class="c1">#calcule la frequence moyenne :</span>
+        <span class="n">freq_trips</span><span class="p">[</span><span class="s1">&#39;mean_headway&#39;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="p">((</span><span class="n">plage_horaire</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">plage_horaire</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">/</span> <span class="n">freq_trips</span><span class="o">.</span><span class="n">nbtrips</span>
+
+        <span class="k">return</span> <span class="n">freq_trips</span></div>
+
+        
+<div class="viewcode-block" id="performances._get_frequence_par_shape">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances._get_frequence_par_shape">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_frequence_par_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop_sequence</span><span class="p">):</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+
+            <span class="n">plage_horaire</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">plage_horaire</span>
+            
+            <span class="n">routes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">routes</span>
+            
+            <span class="c1"># on appelle la table horaire :</span>
+            <span class="n">trips_stops</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">table_horaire</span><span class="p">()</span>
+            <span class="n">trips_stops</span> <span class="o">=</span> <span class="n">trips_stops</span><span class="p">[[</span><span class="s1">&#39;shape_id&#39;</span><span class="p">,</span><span class="s1">&#39;route_id&#39;</span><span class="p">,</span> <span class="s1">&#39;route_short_name&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trip_id&#39;</span><span class="p">,</span><span class="s1">&#39;direction_id&#39;</span><span class="p">,</span> <span class="s1">&#39;service_id&#39;</span><span class="p">,</span> <span class="s2">&quot;stop_sequence&quot;</span><span class="p">,</span> <span class="s1">&#39;stop_id&#39;</span><span class="p">]]</span>
+            
+            <span class="c1"># on merge avec la route pour avoir le numéro :</span>
+            <span class="n">trips_stops</span> <span class="o">=</span> <span class="n">trips_stops</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">routes</span><span class="p">[[</span><span class="s2">&quot;route_id&quot;</span><span class="p">,</span> <span class="s2">&quot;route_long_name&quot;</span><span class="p">]],</span>
+                                            <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;route_id&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># on créé un df freq_trips</span>
+            <span class="c1"># on trie sur la stop_sequence 5</span>
+            <span class="n">freq_trips_shapes</span> <span class="o">=</span> <span class="n">trips_stops</span><span class="p">[</span><span class="n">trips_stops</span><span class="o">.</span><span class="n">stop_sequence</span> <span class="o">==</span> <span class="n">stop_sequence</span><span class="p">]</span> 
+            <span class="c1"># on ne garde que ces colonnes :</span>
+            <span class="n">freq_trips_shapes</span> <span class="o">=</span> <span class="n">freq_trips_shapes</span><span class="p">[[</span><span class="s1">&#39;shape_id&#39;</span><span class="p">,</span><span class="s1">&#39;route_short_name&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;trip_id&#39;</span><span class="p">,</span> <span class="s1">&#39;direction_id&#39;</span><span class="p">,</span> <span class="s1">&#39;service_id&#39;</span><span class="p">]]</span>
+            <span class="c1"># table de contingence pour avoir la fréquence par trip :</span>
+            <span class="n">freq_trips_shapes</span> <span class="o">=</span> <span class="n">freq_trips_shapes</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="s1">&#39;trip_id&#39;</span><span class="p">,</span> 
+                                                <span class="p">[</span><span class="s1">&#39;direction_id&#39;</span><span class="p">,</span> <span class="s1">&#39;shape_id&#39;</span><span class="p">,</span> <span class="s1">&#39;route_short_name&#39;</span><span class="p">],</span>
+                                                <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+            
+            <span class="c1"># renomme les colonnes : </span>
+            <span class="n">freq_trips_shapes</span> <span class="o">=</span> <span class="n">freq_trips_shapes</span><span class="p">[[</span><span class="s2">&quot;shape_id&quot;</span><span class="p">,</span> <span class="s1">&#39;route_short_name&#39;</span><span class="p">,</span><span class="s2">&quot;direction_id&quot;</span><span class="p">,</span> <span class="s2">&quot;trip_id&quot;</span><span class="p">]]</span>
+            <span class="n">freq_trips_shapes</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;shape_id&quot;</span><span class="p">,</span> <span class="s1">&#39;route_short_name&#39;</span><span class="p">,</span><span class="s2">&quot;direction_id&quot;</span><span class="p">,</span> <span class="s2">&quot;nbtrips&quot;</span><span class="p">]</span>
+            <span class="c1">#calcule la frequence moyenne :</span>
+            <span class="n">freq_trips_shapes</span><span class="p">[</span><span class="s1">&#39;mean_headway&#39;</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="p">((</span><span class="n">plage_horaire</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">plage_horaire</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">/</span> <span class="n">freq_trips_shapes</span><span class="o">.</span><span class="n">nbtrips</span>
+
+            <span class="k">return</span> <span class="n">freq_trips_shapes</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pas de fichier shapes.txt&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([])</span></div>
+
+    
+    
+<div class="viewcode-block" id="performances._get_amplitude_par_ligne">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances._get_amplitude_par_ligne">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_amplitude_par_ligne</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="n">plage_horaire</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">]</span>
+        
+        <span class="c1"># on créé un autre feed sur la base du premier pour élargir les horaires</span>
+        <span class="n">feed_temp</span> <span class="o">=</span> <span class="n">gtfs_feed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">gtfs_path</span><span class="p">,</span>
+                              <span class="n">date</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">date</span><span class="p">,</span>
+                              <span class="n">plage_horaire</span><span class="o">=</span><span class="n">plage_horaire</span><span class="p">,</span>
+                              <span class="n">methode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">methode</span><span class="p">)</span>
+        
+        <span class="n">table</span> <span class="o">=</span> <span class="n">feed_temp</span><span class="o">.</span><span class="n">table_horaire</span><span class="p">()</span>
+        
+        <span class="n">maxh</span> <span class="o">=</span> <span class="nb">list</span><span class="p">();</span> <span class="n">minh</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">route</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">route_short_name</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;route_short_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">route</span><span class="p">]</span>
+            <span class="n">maxh</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">arrival_time</span><span class="p">))</span>
+            <span class="n">minh</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">departure_time</span><span class="p">))</span>
+            
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;route_short_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">route_short_name</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">seconds_to_hms</span><span class="p">(</span><span class="n">minh</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">seconds_to_hms</span><span class="p">(</span><span class="n">maxh</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;amplitude (sec.)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">maxh</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">minh</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">df</span></div>
+
+    
+    
+<div class="viewcode-block" id="performances._get_trace_des_lignes">
+<a class="viewcode-back" href="../../expreseau_gtfs.html#expreseau_gtfs.performances.performances._get_trace_des_lignes">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_trace_des_lignes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="n">shapes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">shapes</span>
+        <span class="n">trips</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">trips</span>
+        <span class="n">routes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Feed</span><span class="o">.</span><span class="n">routes</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">shapes</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">list_lines</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">id_</span> <span class="ow">in</span> <span class="n">shapes</span><span class="o">.</span><span class="n">shape_id</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">shapes</span><span class="p">[</span><span class="n">shapes</span><span class="o">.</span><span class="n">shape_id</span> <span class="o">==</span> <span class="n">id_</span><span class="p">]</span>
+                <span class="n">list_points</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">shape_pt_lat</span><span class="p">,</span> <span class="n">tmp</span><span class="o">.</span><span class="n">shape_pt_lon</span><span class="p">):</span>
+                    <span class="n">list_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Point</span><span class="p">([</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">]))</span>
+                <span class="n">list_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">LineString</span><span class="p">(</span><span class="n">list_points</span><span class="p">))</span>
+            <span class="n">gs</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">(</span><span class="n">list_lines</span><span class="p">)</span>
+            
+            <span class="n">geo</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">shapes</span><span class="o">.</span><span class="n">shape_id</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span>
+                                   <span class="n">geometry</span> <span class="o">=</span> <span class="n">gs</span><span class="p">)</span><span class="c1">#.set_crs(&#39;epsg:4326&#39;))</span>
+            
+            <span class="n">geo</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="mi">0</span> <span class="p">:</span> <span class="s1">&#39;shape_id&#39;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+            
+            <span class="c1"># on créé un fichier de fusion trips/routes pour associer le trip_id</span>
+            <span class="c1"># à la route_short_name :</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">trips</span><span class="p">[[</span><span class="s1">&#39;trip_id&#39;</span><span class="p">,</span> <span class="s1">&#39;route_id&#39;</span><span class="p">,</span> <span class="s2">&quot;shape_id&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">routes</span><span class="p">[[</span><span class="s1">&#39;route_id&#39;</span><span class="p">,</span> <span class="s1">&#39;route_short_name&#39;</span><span class="p">]],</span>
+                                                       <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;route_id&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># conversion des trip_ids en strings:</span>
+            <span class="n">geo</span><span class="o">.</span><span class="n">shape_id</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">shape_id</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+            <span class="n">tmp</span><span class="o">.</span><span class="n">shape_id</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">shape_id</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+            
+            <span class="c1"># fusion :</span>
+            <span class="n">geo</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;shape_id&quot;</span><span class="p">)</span>
+            
+            
+            <span class="k">return</span> <span class="n">geo</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pas de fichier shape&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">()</span></div>
+</div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Lucas FAGES.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

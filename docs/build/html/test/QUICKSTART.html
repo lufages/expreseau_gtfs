@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QUICKSTART.html &mdash; Expreseau GTFS 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../modules.html" class="icon icon-home">
+            Expreseau GTFS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../expreseau_gtfs.html">Package expreseau_gtfs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../modules.html">Expreseau GTFS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../modules.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">QUICKSTART.html</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/test/QUICKSTART.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="quickstart-html">
+<h1>QUICKSTART.html<a class="headerlink" href="#quickstart-html" title="Link to this heading"></a></h1>
+<iframe src='QUICKSTART.html' width='100%' height='800px'></iframe><section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="#pour-un-usage-basique">Pour un usage basique</a></p></li>
+<li><p><a class="reference external" href="#pour-un-usage-avancé">Pour un usage avancé</a>
+* <a href="#id1"><span class="problematic" id="id2">`</span></a>Créer</p></li>
+</ul>
+</div></blockquote>
+<p>un objet gtfs_feed() et charger des fichiers gtfs au format
+<a href="#id3"><span class="problematic" id="id4">*</span></a>.zip &lt;#créer-un-objet-gtfs_feed-et-charger-des-fichiers-gtfs-au-format-.zip&gt;`_</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a href="#id5"><span class="problematic" id="id6">`</span></a>Calculer</p></li>
+</ul>
+</div></blockquote>
+<p>des indicateurs de performances du réseau avec l’objet
+performances() &lt;#calculer-des-indicateurs-de-performances-du-réseau-avec-lobjet-performances&gt;`_</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a href="#id7"><span class="problematic" id="id8">`</span></a>Obtenir la fréquence par</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>segments &lt;#obtenir-la-fréquence-par-segments&gt;`_</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="#obtenir-le-tracés-des-lignes">Obtenir le tracés des lignes</a></p></li>
+<li><p><a href="#id9"><span class="problematic" id="id10">`</span></a>Obtenir la fréquence par</p></li>
+</ul>
+</dd>
+<dt>shape &lt;#obtenir-la-fréquence-par-shape&gt;`_</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="#découpage-de-ligne-par-tronçons">Découpage de ligne par tronçons</a>
+* <a href="#id11"><span class="problematic" id="id12">`</span></a>Obtenir</p></li>
+</ul>
+</dd>
+</dl>
+<p>la table horaire du jour demandé et de l’heure
+demandée &lt;#obtenir-la-table-horaire-du-jour-demandé-et-de-lheure-demandée&gt;`_</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="#obtenir-les-services-exceptés">Obtenir les services exceptés</a></p></li>
+<li><p><a href="#id13"><span class="problematic" id="id14">`</span></a>Tracer</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>l’évolution journalière de l’offre, heure par heure &lt;#tracer-lévolution-journalière-de-loffre-heure-par-heure&gt;`_</dt><dd><ul class="simple">
+<li><p><a href="#id15"><span class="problematic" id="id16">`</span></a>Obtenir la</p></li>
+</ul>
+</dd>
+<dt>fréquence par ligne du jour demandé &lt;#obtenir-la-fréquence-par-ligne-du-jour-demandé&gt;`_</dt><dd><ul class="simple">
+<li><p><a href="#id17"><span class="problematic" id="id18">`</span></a>Obtenir</p></li>
+</ul>
+</dd>
+<dt>l’amplitude par ligne au jour demandé &lt;#obtenir-lamplitude-par-ligne-au-jour-demandé&gt;`_</dt><dd><ul class="simple">
+<li><p><a href="#id19"><span class="problematic" id="id20">`</span></a>Tracer les</p></li>
+</ul>
+</dd>
+<dt>lignes avec matplotlib et geopandas<span class="classifier">&lt;#tracer-les-lignes-avec-matplotlib-et-geopandas&gt;`_</span></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="#créer-un-objet-sections">Créer un objet sections()</a></p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Lucas FAGES.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

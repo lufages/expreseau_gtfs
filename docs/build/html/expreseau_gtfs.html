@@ -1,0 +1,1145 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Package expreseau_gtfs &mdash; Expreseau GTFS 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="expreseau_gtfs" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="modules.html" class="icon icon-home">
+            Expreseau GTFS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Package expreseau_gtfs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#feed">feed</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed"><code class="docutils literal notranslate"><span class="pre">gtfs_feed</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.data"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.date"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.evol_journaliere"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.evol_journaliere()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.evol_journaliere_ligne"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.evol_journaliere_ligne()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.gtfs_path"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.gtfs_path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.methode"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.methode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.plage_horaire"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.plage_horaire</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.plot_evol_journaliere"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.plot_evol_journaliere()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.routes"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.routes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.services"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.services()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.services_exceptes"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.services_exceptes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.shapes"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.shapes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.stop_times"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.stop_times</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.stops"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.stops</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.table_horaire"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.table_horaire()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.feed.gtfs_feed.trips"><code class="docutils literal notranslate"><span class="pre">gtfs_feed.trips</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#graphes">graphes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#expreseau_gtfs.graphes.graphes"><code class="docutils literal notranslate"><span class="pre">graphes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.graphes.graphes.betweenness_centrality"><code class="docutils literal notranslate"><span class="pre">graphes.betweenness_centrality()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.graphes.graphes.closeness_centrality"><code class="docutils literal notranslate"><span class="pre">graphes.closeness_centrality()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.graphes.graphes.dijkstra_min_transfers"><code class="docutils literal notranslate"><span class="pre">graphes.dijkstra_min_transfers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.graphes.graphes.distance"><code class="docutils literal notranslate"><span class="pre">graphes.distance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.graphes.graphes.facteur_distance"><code class="docutils literal notranslate"><span class="pre">graphes.facteur_distance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.graphes.graphes.gtfs_to_nx"><code class="docutils literal notranslate"><span class="pre">graphes.gtfs_to_nx()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.graphes.graphes.isochrones"><code class="docutils literal notranslate"><span class="pre">graphes.isochrones()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.graphes.graphes.table_noeuds"><code class="docutils literal notranslate"><span class="pre">graphes.table_noeuds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.graphes.graphes.table_segments"><code class="docutils literal notranslate"><span class="pre">graphes.table_segments()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.graphes.graphes.vitesse_marche"><code class="docutils literal notranslate"><span class="pre">graphes.vitesse_marche</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-expreseau_gtfs.performances">performances</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#expreseau_gtfs.performances.performances"><code class="docutils literal notranslate"><span class="pre">performances</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.performances.performances.amplitude_par_ligne"><code class="docutils literal notranslate"><span class="pre">performances.amplitude_par_ligne()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.performances.performances.freq_min"><code class="docutils literal notranslate"><span class="pre">performances.freq_min()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.performances.performances.frequence_par_ligne"><code class="docutils literal notranslate"><span class="pre">performances.frequence_par_ligne()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.performances.performances.frequence_par_segment"><code class="docutils literal notranslate"><span class="pre">performances.frequence_par_segment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.performances.performances.frequence_par_shapes"><code class="docutils literal notranslate"><span class="pre">performances.frequence_par_shapes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.performances.performances.traces_des_lignes"><code class="docutils literal notranslate"><span class="pre">performances.traces_des_lignes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-expreseau_gtfs.sections">sections</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#expreseau_gtfs.sections.sections"><code class="docutils literal notranslate"><span class="pre">sections</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.sections.sections.append_list_section"><code class="docutils literal notranslate"><span class="pre">sections.append_list_section</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.sections.sections.arrivees"><code class="docutils literal notranslate"><span class="pre">sections.arrivees</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.sections.sections.decoupe_auto"><code class="docutils literal notranslate"><span class="pre">sections.decoupe_auto()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.sections.sections.departs"><code class="docutils literal notranslate"><span class="pre">sections.departs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.sections.sections.graph"><code class="docutils literal notranslate"><span class="pre">sections.graph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.sections.sections.list_section"><code class="docutils literal notranslate"><span class="pre">sections.list_section</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expreseau_gtfs.sections.sections.noeud_separation"><code class="docutils literal notranslate"><span class="pre">sections.noeud_separation</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-expreseau_gtfs.utils">Module utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#expreseau_gtfs.utils.nbc_to_gdf"><code class="docutils literal notranslate"><span class="pre">nbc_to_gdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expreseau_gtfs.utils.nxbetweenness_to_df"><code class="docutils literal notranslate"><span class="pre">nxbetweenness_to_df()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expreseau_gtfs.utils.seconds_to_hms"><code class="docutils literal notranslate"><span class="pre">seconds_to_hms()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expreseau_gtfs.utils.trouver_intervalle"><code class="docutils literal notranslate"><span class="pre">trouver_intervalle()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pour-un-usage-basique">Pour un usage basique <a id="usabasique"></a></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creer-un-objet-gtfs-feed-et-charger-des-fichiers-gtfs-au-format-zip">Créer un objet <em>gtfs_feed()</em> et charger des fichiers gtfs au format *.zip <a id="chargergtfs"></a></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#calculer-des-indicateurs-de-performances-du-reseau-avec-l-objet-performances">Calculer des indicateurs de performances du réseau avec l’objet <em>performances()</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#obtenir-la-frequence-par-segments">Obtenir la fréquence par segments <a id="frseg"></a></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#obtenir-le-traces-des-lignes">Obtenir le tracés des lignes <a id="trclignes"></a></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#obtenir-la-frequence-par-shape">Obtenir la fréquence par <em>shape</em> <a id="frshp"></a></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pour-un-usage-avance">Pour un usage avancé <a id="usaavance"></a></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#decoupage-de-ligne-par-troncons">Découpage de ligne par tronçons <a id="decoupauto"></a></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="modules.html">Expreseau GTFS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="modules.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Package expreseau_gtfs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/expreseau_gtfs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="package-expreseau-gtfs">
+<h1>Package expreseau_gtfs<a class="headerlink" href="#package-expreseau-gtfs" title="Link to this heading"></a></h1>
+<p>EXPloration des RESEAUx de transports en commun avec les fichiers GTFS.</p>
+<p>Cette librairie est conçue comme un ensemble d’outils pour la manipulation et l’exploration
+des données gtfs pour l’analyse de la performance des réseaux de transports en commun. Elle
+permet également de réaliser des analyses d’accessibilité et du calcul d’itinéraire
+basés sur la théorie des graphes.</p>
+<p>Auteur : Lucas FAGES
+Contact : <a class="reference external" href="mailto:lucas&#46;fages&#37;&#52;&#48;cnrs&#46;fr">lucas<span>&#46;</span>fages<span>&#64;</span>cnrs<span>&#46;</span>fr</a></p>
+<section id="feed">
+<h2>feed<a class="headerlink" href="#feed" title="Link to this heading"></a></h2>
+<p>Le module feed la classe gtfs_feed. L’objet gtfs_feed(fichiers <a href="#id1"><span class="problematic" id="id2">*</span></a>.zip gtfs)
+permet d’encapsuler le contenu du dossier zippé des GTFS et des les trier selon une date et une heure choisie.
+Ce module comprend des fonction d’exploration des fichiers GTFS. C’est le point d’entrée pour les autres modules.</p>
+<dl class="py class" id="module-expreseau_gtfs.feed">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expreseau_gtfs.feed.</span></span><span class="sig-name descname"><span class="pre">gtfs_feed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gtfs_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plage_horaire</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">methode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'date'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/feed.html#gtfs_feed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.data">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_fic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/feed.html#gtfs_feed.data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.data" title="Link to this definition"></a></dt>
+<dd><p>Renvoit le fichier brut spécifié (trips, routes, etc.)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name_fic</strong> – Nom du fichier texte sans l’extension : p.ex. : “trips”</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Renvoit le fichier sous forme de dataframe.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.dataframe()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.date">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">date</span></span><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.date" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.evol_journaliere">
+<span class="sig-name descname"><span class="pre">evol_journaliere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stop_sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/feed.html#gtfs_feed.evol_journaliere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.evol_journaliere" title="Link to this definition"></a></dt>
+<dd><p>Renvoit un pandas dataframe avec l’évolution par tranche horaire de 1h
+pour l’ensemble des lignes du réseau.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stop_sequence</strong> (<em>int</em><em>, </em><em>optional</em>) – Séquence de l’arrêt sur la ligne (1er, 2ème, etc.). La valeur par défaut est 5.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas.dataframe()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.evol_journaliere_ligne">
+<span class="sig-name descname"><span class="pre">evol_journaliere_ligne</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ligne</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/feed.html#gtfs_feed.evol_journaliere_ligne"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.evol_journaliere_ligne" title="Link to this definition"></a></dt>
+<dd><p>Renvoit un pandas dataframe avec l’évolution par tranche horaire de 1h
+pour la ou les lignes spécifiées.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ligne</strong> (<em>list</em><em>(</em><em>)</em>) – Liste de lignes dont on veut connaitre l’évolution de la fréquentation.
+Pour spécifier une ligne, écrire sous la forme : [‘ligne’].</p></li>
+<li><p><strong>stop_sequence</strong> (<em>int</em><em>, </em><em>optional</em>) – Séquence de l’arrêt sur la ligne (1er, 2ème, etc.). La valeur par défaut est 5.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Le dataframe de l’évolution de la fréquence par heure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.dataframe()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.gtfs_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gtfs_path</span></span><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.gtfs_path" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.methode">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">methode</span></span><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.methode" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.plage_horaire">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plage_horaire</span></span><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.plage_horaire" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.plot_evol_journaliere">
+<span class="sig-name descname"><span class="pre">plot_evol_journaliere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">titre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Evolution</span> <span class="pre">journalière'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_axe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_axe_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'évol.</span> <span class="pre">ens.</span> <span class="pre">des</span> <span class="pre">lignes</span> <span class="pre">[nombre]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liste_ligne_a_tracer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_axe_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'évol.</span> <span class="pre">lignes</span> <span class="pre">spécif.</span> <span class="pre">[nombre]'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/feed.html#gtfs_feed.plot_evol_journaliere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.plot_evol_journaliere" title="Link to this definition"></a></dt>
+<dd><p>Plot matplotlib de l’évolution de l’offre par heure. Possibilité d’analyser
+cette évolution pour certaines lignes en les ajoutant sous forme de liste.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>titre</strong> (<em>str</em><em>, </em><em>optionnal</em>) – Par défaut : “Evolution journalière”.</p></li>
+<li><p><strong>x_axe</strong> (<em>str</em><em>, </em><em>optionnal</em>)</p></li>
+<li><p><strong>y_axe_1</strong> (<em>str</em><em>, </em><em>optionnal</em>) – Titre de l’axe y de gauche (ensemble des lignes). Par défaut : “évol. ens. des lignes [nombre]”.</p></li>
+<li><p><strong>liste_ligne_a_tracer</strong> (<em>list</em><em>(</em><em>)</em><em>, </em><em>optionnal</em>) – Liste des lignes à ajouter au graphique.</p></li>
+<li><p><strong>y_axe_2</strong> (<em>str</em><em>, </em><em>optionnal</em>) – Titre de l’axe y de droite (lignes spécifiées).
+Par défaut : “évol. lignes spécif. [nombre]”.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.routes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">routes</span></span><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.routes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.services">
+<span class="sig-name descname"><span class="pre">services</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/feed.html#gtfs_feed.services"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.services" title="Link to this definition"></a></dt>
+<dd><p>Renvoit la liste des services circulant le jour demandé</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>python list()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.services_exceptes">
+<span class="sig-name descname"><span class="pre">services_exceptes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/feed.html#gtfs_feed.services_exceptes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.services_exceptes" title="Link to this definition"></a></dt>
+<dd><p>Renvoit la liste des services concernés par une exception le jour
+demandé.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>python list()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.shapes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shapes</span></span><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.shapes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.stop_times">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stop_times</span></span><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.stop_times" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.stops">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stops</span></span><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.stops" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.table_horaire">
+<span class="sig-name descname"><span class="pre">table_horaire</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/feed.html#gtfs_feed.table_horaire"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.table_horaire" title="Link to this definition"></a></dt>
+<dd><p>Renvoit la table horaire (tous les arrêts et leurs passages par ligne et direction)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dataframe avec les stops et leurs horaires de passages, les lignes, les coordonnées, etc.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas.dataframe()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.feed.gtfs_feed.trips">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">trips</span></span><a class="headerlink" href="#expreseau_gtfs.feed.gtfs_feed.trips" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="graphes">
+<h2>graphes<a class="headerlink" href="#graphes" title="Link to this heading"></a></h2>
+<p>L’objet graphe(), permet de convertir à l’aide de la méthode gtfs_to_nx, un objet feed() en graphe Networkx.
+Le module graphes contient des fonctionnalités des calculs d’itinéraires, d’isochrones, des closeness et de betweenness centrality.</p>
+<dl class="py class" id="module-expreseau_gtfs.graphes">
+<dt class="sig sig-object py" id="expreseau_gtfs.graphes.graphes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expreseau_gtfs.graphes.</span></span><span class="sig-name descname"><span class="pre">graphes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Feed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vitesse_marche</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">facteur_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/graphes.html#graphes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.graphes.graphes" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.graphes.graphes.betweenness_centrality">
+<span class="sig-name descname"><span class="pre">betweenness_centrality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/graphes.html#graphes.betweenness_centrality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.graphes.graphes.betweenness_centrality" title="Link to this definition"></a></dt>
+<dd><p>Calcule la betweenness centrality en minimisant le temps de parcours les correspondances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>networkx.DiGraph</em><em>(</em><em>)</em>) – Graphe du réseau de transport issue de la méthode gtfs_to_nx().</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Betweenness centrality pour chaque arrêt.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.graphes.graphes.closeness_centrality">
+<span class="sig-name descname"><span class="pre">closeness_centrality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/graphes.html#graphes.closeness_centrality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.graphes.graphes.closeness_centrality" title="Link to this definition"></a></dt>
+<dd><p>Calcule la closeness centrality en minimisant le temps de parcours les correspondances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>networkx.DiGraph</em><em>(</em><em>)</em>) – Graphe du réseau de transport issue de la méthode gtfs_to_nx().</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Closeness centrality pour chaque arrêt.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.graphes.graphes.dijkstra_min_transfers">
+<span class="sig-name descname"><span class="pre">dijkstra_min_transfers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_transfers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/graphes.html#graphes.dijkstra_min_transfers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.graphes.graphes.dijkstra_min_transfers" title="Link to this definition"></a></dt>
+<dd><p>Calcule le chemin le plus court (temps) en minimisant les correspondances.
+Adaptation de l’algorithme Dijkstra.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>networkx.DiGraph</em><em>(</em><em>)</em>) – Graphe du réseau de transport issue de la méthode gtfs_to_nx().</p></li>
+<li><p><strong>source</strong> (<em>str</em>) – rret (stop_id) tel que définit dans le df graphes.table_noeuds().</p></li>
+<li><p><strong>target</strong> (<em>str</em>) – Arret (stop_id) tel que définit dans le df graphes.table_noeuds().</p></li>
+<li><p><strong>max_transfers</strong> (<em>int</em>) – Maximum de correspondances.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>Coût</strong> (<em>float</em>) – Temps de transport du trajet. Issu des tables horaires.</p></li>
+<li><p><strong>Nombre de correspondances</strong> (<em>intYPE</em>) – Correspondances du trajet proposé.</p></li>
+<li><p><strong>path</strong> (<em>python list()</em>) – Liste des arrêts empruntés par le trajet le plus court.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.graphes.graphes.distance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">distance</span></span><a class="headerlink" href="#expreseau_gtfs.graphes.graphes.distance" title="Link to this definition"></a></dt>
+<dd><p>int
+La valeur par défaut est 500. C’est la distance à vol
+d’oiseau atteignable à pied (en mètres) pour la connexion des arrêts..</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.graphes.graphes.facteur_distance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">facteur_distance</span></span><a class="headerlink" href="#expreseau_gtfs.graphes.graphes.facteur_distance" title="Link to this definition"></a></dt>
+<dd><p>float
+Facteur correcteur de la distance à vol d’oiseau. La valeur par défaut est 1.5.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.graphes.graphes.gtfs_to_nx">
+<span class="sig-name descname"><span class="pre">gtfs_to_nx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MALUS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/graphes.html#graphes.gtfs_to_nx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.graphes.graphes.gtfs_to_nx" title="Link to this definition"></a></dt>
+<dd><p>Renvoit un graphe networkx simple directionnel routable et utilisable
+avec la librairie networkx.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>MALUS</strong> (<em>int</em><em>, </em><em>optional</em>) – La valeur par défaut est 3. Coefficient multiplicateur
+pour éviter les correspondances anarchiques entre deux lignes suivant
+les mêmes corridors.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – La valeur par défaut est False. Affichage des
+commentaires lors de la création du graphe.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>cg</strong> – Graohe du réseau, utilisable avec les méthodes de la librairie networkx.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>networkx.DiGraph()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.graphes.graphes.isochrones">
+<span class="sig-name descname"><span class="pre">isochrones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temps_secondes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[300,</span> <span class="pre">900,</span> <span class="pre">1800]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['5min',</span> <span class="pre">'15min',</span> <span class="pre">'30min']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'epsg:2154'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoservice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pedestrian'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/graphes.html#graphes.isochrones"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.graphes.graphes.isochrones" title="Link to this definition"></a></dt>
+<dd><p>Créé des isochrones de couplage marche à pied/voiture + transports en commun à
+partir d’un arrêt choisi.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>networkx.DiGraph</em><em>(</em><em>)</em>) – Graphe du réseau de transport issue de la méthode gtfs_to_nx().</p></li>
+<li><p><strong>source</strong> (<em>str</em>) – rret (stop_id) tel que définit dans le df graphes.table_noeuds().</p></li>
+<li><p><strong>temps_secondes</strong> (<em>python list</em><em>(</em><em>)</em><em>, </em><em>optional</em>) – Liste des intervalles de temps souhaités en secondes. Les valeurs par défaut : [300,900,1800].</p></li>
+<li><p><strong>labels</strong> (<em>python list</em><em>(</em><em>)</em><em>, </em><em>optional</em>) – Liste des labels des intervalles de temps souhaités. Les valeurs par défaut : [‘5min’, ‘15min’, ‘30min’].</p></li>
+<li><p><strong>crs</strong> (<em>str</em><em>, </em><em>optional</em>) – Projection par défaut : “epsg:2154”.</p></li>
+<li><p><strong>speed</strong> (<em>int</em><em>, </em><em>optional</em>) – Vitesse de déplacement. Valeur par défaut : 4.</p></li>
+<li><p><strong>geoservice</strong> (<em>bool</em><em>, </em><em>optional</em>) – La valeur True permet de faire appel à l’API Geoservices de l’IGN pour le calcul des temps de parcours. Par défaut, la valeur est False.</p></li>
+<li><p><strong>mode</strong> (<em>str</em><em>, </em><em>optional</em>) – Utilisée dans le cas où geoservice=True. Il permet de choisir entre “car” et “pedestrian”. La valeur par défaut est “pedestrian”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Multipolygones des isochrones.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>geopandas.GeoDataFrame()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.graphes.graphes.table_noeuds">
+<span class="sig-name descname"><span class="pre">table_noeuds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/graphes.html#graphes.table_noeuds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.graphes.graphes.table_noeuds" title="Link to this definition"></a></dt>
+<dd><p>Table des noeuds qui servent à construire le graphe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.graphes.graphes.table_segments">
+<span class="sig-name descname"><span class="pre">table_segments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/graphes.html#graphes.table_segments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.graphes.graphes.table_segments" title="Link to this definition"></a></dt>
+<dd><p>Table des arêtes qui servent à constuire le graphe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame().</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.graphes.graphes.vitesse_marche">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vitesse_marche</span></span><a class="headerlink" href="#expreseau_gtfs.graphes.graphes.vitesse_marche" title="Link to this definition"></a></dt>
+<dd><p>float
+La valeur par défaut est 4.0. Vitesse de marche
+suposée entre deux arrêts, destination ou origine.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-expreseau_gtfs.performances">
+<span id="performances"></span><h2>performances<a class="headerlink" href="#module-expreseau_gtfs.performances" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="expreseau_gtfs.performances.performances">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expreseau_gtfs.performances.</span></span><span class="sig-name descname"><span class="pre">performances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Feed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/performances.html#performances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.performances.performances" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.performances.performances.amplitude_par_ligne">
+<span class="sig-name descname"><span class="pre">amplitude_par_ligne</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/performances.html#performances.amplitude_par_ligne"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.performances.performances.amplitude_par_ligne" title="Link to this definition"></a></dt>
+<dd><p>Renvoit un dataframe contenant l’heure du premier départ et l’heure de
+la dernière arrivée par ligne.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dataframe de l’amplitude par ligne.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas.dataframe()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.performances.performances.freq_min">
+<span class="sig-name descname"><span class="pre">freq_min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stop_sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/performances.html#performances.freq_min"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.performances.performances.freq_min" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Pour chaque ligne, calcul de la fréquence moyenne par heure de 7h à 21h.
+On récupère la plus mauvaise de ces fréquences pour chauque ligne.</p>
+<dl class="simple">
+<dt>stop_sequence<span class="classifier">int, optional</span></dt><dd><p>Par défaut stop_sequence = 8.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>pandas.dataframe()</dt><dd><p>Dataframe de la fréquence par minimale.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.performances.performances.frequence_par_ligne">
+<span class="sig-name descname"><span class="pre">frequence_par_ligne</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stop_sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/performances.html#performances.frequence_par_ligne"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.performances.performances.frequence_par_ligne" title="Link to this definition"></a></dt>
+<dd><p>Renvoit la fréquence moyenne par ligne sur la période renseignée dans
+l’objet gtfs_feed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stop_sequence</strong> (<em>int</em><em>, </em><em>optional</em>) – Détermine à quel numéro d’arrêt de la ligne sera
+calculée la fréquence moyenne. Par défaut, stop_sequence = 1.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataframe avec la fréquence par ligne et le temps
+d’attente moyen.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.dataframe()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.performances.performances.frequence_par_segment">
+<span class="sig-name descname"><span class="pre">frequence_par_segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/performances.html#performances.frequence_par_segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.performances.performances.frequence_par_segment" title="Link to this definition"></a></dt>
+<dd><p>Renvoit la fréquence moyenne par segments sur la période renseignée dans
+l’objet gtfs_feed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>coords</strong> (<em>bool</em><em>, </em><em>optional</em>) – Permet d’avoir les coordonnées des segments pour
+un post-traitement avec la classe sections. Par défaut, coords = False.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Fréquence par segment (arrêt à arrêt) et par ligne.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>geopandas.geodataframe()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.performances.performances.frequence_par_shapes">
+<span class="sig-name descname"><span class="pre">frequence_par_shapes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stop_sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/performances.html#performances.frequence_par_shapes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.performances.performances.frequence_par_shapes" title="Link to this definition"></a></dt>
+<dd><p>Renvoit la fréquence moyenne par shape sur la période renseignée dans
+l’objet gtfs_feed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stop_sequence</strong> (<em>int</em><em>, </em><em>optional</em>) – Détermine à quel numéro d’arrêt de la ligne sera
+calculée la fréquence moyenne. Par défaut, stop_sequence = 1</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataframe de la fréquence par shape_id.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.dataframe()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.performances.performances.traces_des_lignes">
+<span class="sig-name descname"><span class="pre">traces_des_lignes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/performances.html#performances.traces_des_lignes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.performances.performances.traces_des_lignes" title="Link to this definition"></a></dt>
+<dd><p>Renvoit un geodataframe des tracés des lignes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Geodataframe des formes des lignes (shapes.txt) avec le trip_id associé.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>geopandas.geodataframe()</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-expreseau_gtfs.sections">
+<span id="sections"></span><h2>sections<a class="headerlink" href="#module-expreseau_gtfs.sections" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="expreseau_gtfs.sections.sections">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expreseau_gtfs.sections.</span></span><span class="sig-name descname"><span class="pre">sections</span></span><a class="reference internal" href="_modules/expreseau_gtfs/sections.html#sections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.sections.sections" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.sections.sections.append_list_section">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">append_list_section</span></span><a class="headerlink" href="#expreseau_gtfs.sections.sections.append_list_section" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.sections.sections.arrivees">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">arrivees</span></span><a class="headerlink" href="#expreseau_gtfs.sections.sections.arrivees" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expreseau_gtfs.sections.sections.decoupe_auto">
+<span class="sig-name descname"><span class="pre">decoupe_auto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stops=Empty</span> <span class="pre">DataFrame</span> <span class="pre">Columns:</span> <span class="pre">[]</span> <span class="pre">Index:</span> <span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temps=60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coef=1.3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/sections.html#sections.decoupe_auto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.sections.sections.decoupe_auto" title="Link to this definition"></a></dt>
+<dd><dl>
+<dt>Algo de découpage automatique d’une ligne en plusieurs tronçons :</dt><dd><ul class="simple">
+<li><p>selon les jonctions/séparations</p></li>
+<li><p>selon la variation brutale de l’offre de service (permet</p></li>
+</ul>
+<p>de distinguer les renforcements de candence sur certains tronçons
+d’une ligne en heure de pointe)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stops</strong> (<em>pandas.DataFrame</em><em>(</em><em>)</em><em>, </em><em>optional</em>) – Fichier stops du jeu GTFS.</p></li>
+<li><p><strong>temps</strong> (<em>int</em><em>, </em><em>optional</em>) – Nombre d’heures en minutes, à multiplier par la taille de l’intervalle de temps. Par défaut : 60.</p></li>
+<li><p><strong>coef</strong> (<em>TYPE</em><em>, </em><em>optional</em>) – Coefficient affine du nombre de trajets entre deux segments consécutifs.
+Si le rapport du nombre de trajet est supérieur au coefficient, on créé un nouveau tronçon. Par défaut : 1.3.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>geopandas.GeoDataFrame()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.sections.sections.departs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">departs</span></span><a class="headerlink" href="#expreseau_gtfs.sections.sections.departs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.sections.sections.graph">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">graph</span></span><a class="headerlink" href="#expreseau_gtfs.sections.sections.graph" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.sections.sections.list_section">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">list_section</span></span><a class="headerlink" href="#expreseau_gtfs.sections.sections.list_section" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expreseau_gtfs.sections.sections.noeud_separation">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">noeud_separation</span></span><a class="headerlink" href="#expreseau_gtfs.sections.sections.noeud_separation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-expreseau_gtfs.utils">
+<span id="module-utils"></span><h2>Module utils<a class="headerlink" href="#module-expreseau_gtfs.utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="expreseau_gtfs.utils.nbc_to_gdf">
+<span class="sig-prename descclassname"><span class="pre">expreseau_gtfs.utils.</span></span><span class="sig-name descname"><span class="pre">nbc_to_gdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nbc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_noeuds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/utils.html#nbc_to_gdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.utils.nbc_to_gdf" title="Link to this definition"></a></dt>
+<dd><p>Met en relation un indicateur de centralité (voir nxbetweenness_to_df()) et
+les coordonnées des arrêts dans un geopandas geodataframe.
+——–
+Args :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>nbc : pandas dataframe issus de nxbetweenness_to_df()</p></li>
+<li><p>table_noeuds: voir méthode graphe.table_noeuds()</p></li>
+<li><p>col: str. Nom de la colone à donner au geodataframe.</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreseau_gtfs.utils.nxbetweenness_to_df">
+<span class="sig-prename descclassname"><span class="pre">expreseau_gtfs.utils.</span></span><span class="sig-name descname"><span class="pre">nxbetweenness_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nbc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/utils.html#nxbetweenness_to_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.utils.nxbetweenness_to_df" title="Link to this definition"></a></dt>
+<dd><p>Fonctionne avec les méthodes betweenness_centrality, closenness_centrality
+et degree_centrality de networkx.
+Récupère le dictionnaire (résultat des méthodes) et le transforme en dataframe.
+——–
+Args :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>nbc : dict. Renvoi des méthodes networkx.</p></li>
+<li><p>col: str. Nom de la colone à donner au dataframe.</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreseau_gtfs.utils.seconds_to_hms">
+<span class="sig-prename descclassname"><span class="pre">expreseau_gtfs.utils.</span></span><span class="sig-name descname"><span class="pre">seconds_to_hms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/utils.html#seconds_to_hms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.utils.seconds_to_hms" title="Link to this definition"></a></dt>
+<dd><p>Convertit une liste de temps en secondes en format “hh:mm:ss”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>seconds</strong> (<em>python list</em><em>(</em><em>)</em>) – Liste d’entier de plsuieurs temps en secondes au format : [300, 500, etc].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>temps_formatte</strong> – Liste de strings de temps au format “hh:mm:ss”.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pyhton list()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expreseau_gtfs.utils.trouver_intervalle">
+<span class="sig-prename descclassname"><span class="pre">expreseau_gtfs.utils.</span></span><span class="sig-name descname"><span class="pre">trouver_intervalle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date_demandee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expreseau_gtfs/utils.html#trouver_intervalle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expreseau_gtfs.utils.trouver_intervalle" title="Link to this definition"></a></dt>
+<dd><section id="trouve-l-intervalle-contenant-une-date-donnee-dans-des-fichiers-gtfs">
+<h3>Trouve l’intervalle contenant une date donnée dans des fichiers GTFS.<a class="headerlink" href="#trouve-l-intervalle-contenant-une-date-donnee-dans-des-fichiers-gtfs" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Args :</dt><dd><ul class="simple">
+<li><p>date_demandee : str, “yyyymmdd”</p></li>
+<li><p>dataframe du fichier “calendar”</p></li>
+</ul>
+</dd>
+</dl>
+<blockquote>
+<div><p>demandée et les intervalles de circulation (start_date, end_date)</p>
+</div></blockquote>
+</section>
+</dd></dl>
+
+</section>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="#usabasique"><span class="xref myst">Pour un usage basique</span></a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#chargergtfs"><span class="xref myst">Charger un fichier gtfs au format *.zip</span></a><br />
+a. <a class="reference internal" href="#plotevol"><span class="xref myst">Tracer l’évolution journalière de l’offre</span></a><br />
+b. <a class="reference internal" href="#servex"><span class="xref myst">Obtenir les services exceptés</span></a><br />
+c. <a class="reference internal" href="#tabhor"><span class="xref myst">Obtenir la table horaire du jour demandé</span></a></p></li>
+<li><p>[Calculer des indicateurs de performances du réseau]<br />
+a. <a class="reference internal" href="#frligne"><span class="xref myst">Obtenir la fréquence par ligne du jour demandé</span></a><br />
+b. <a class="reference internal" href="#ampligne"><span class="xref myst">Obtenir l’amplitude par ligne au jour demandé</span></a><br />
+c. <a class="reference internal" href="#frseg"><span class="xref myst">Obtenir la fréquence par segments</span></a><br />
+d. <a class="reference internal" href="#trclignes"><span class="xref myst">Obtenir le tracés des lignes</span></a><br />
+e. <a class="reference internal" href="#frshp"><span class="xref myst">Obtenir la fréquence par <em>shape</em></span></a></p></li>
+</ol>
+<p><a class="reference internal" href="#usaavance"><span class="xref myst">Pour un usage avancé</span></a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#decoupauto"><span class="xref myst">Découpage automatique d’une ligne en tronçons</span></a><br />
+a.  <a class="reference internal" href="#objsections"><span class="xref myst">Créer un objet <em>sections()</em></span></a></p></li>
+</ol>
+<p>[Exemples]</p>
+<section id="pour-un-usage-basique">
+<h3>Pour un usage basique <a id="usabasique"></a><a class="headerlink" href="#pour-un-usage-basique" title="Link to this heading"></a></h3>
+<section id="creer-un-objet-gtfs-feed-et-charger-des-fichiers-gtfs-au-format-zip">
+<h4>Créer un objet <em>gtfs_feed()</em> et charger des fichiers gtfs au format *.zip <a id="chargergtfs"></a><a class="headerlink" href="#creer-un-objet-gtfs-feed-et-charger-des-fichiers-gtfs-au-format-zip" title="Link to this heading"></a></h4>
+<p>Dans l’objet <em>gtfs_feed()</em> il est nécessaire de renseigner une date (“yyyymmdd”) et une plage horaire ([7,9] par exemple)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">expreseau_gtfs.feed</span> <span class="kn">import</span> <span class="n">gtfs_feed</span>
+<span class="n">fic</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;~\gtfs_data.zip&quot;</span>
+<span class="n">date</span> <span class="o">=</span> <span class="s2">&quot;20240305&quot;</span>
+<span class="n">plage_horaire</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">Feed</span> <span class="o">=</span> <span class="n">gtfs_feed</span><span class="p">(</span><span class="n">fic</span><span class="p">,</span> <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="p">,</span> <span class="n">plage_horaire</span> <span class="o">=</span> <span class="n">plage_horaire</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ainsi, on peut avoir accès, d’une part à tous les fichiers *.txt contenus dans le répertoire zippé, par exemple les <em>routes</em> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Feed</span><span class="o">.</span><span class="n">routes</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>index</p></th>
+<th class="head"><p>route_id</p></th>
+<th class="head"><p>agency_id</p></th>
+<th class="head"><p>route_short_name</p></th>
+<th class="head"><p>route_long_name</p></th>
+<th class="head"><p>route_desc</p></th>
+<th class="head"><p>route_type</p></th>
+<th class="head"><p>route_url</p></th>
+<th class="head"><p>route_color</p></th>
+<th class="head"><p>route_text_color</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>11821953316814882</p></td>
+<td><p>6192453782601729</p></td>
+<td><p>3</p></td>
+<td><p>Ligne 3</p></td>
+<td><p>Ligne Ligne 3</p></td>
+<td><p>3</p></td>
+<td><p>NaN</p></td>
+<td><p>ed6e00</p></td>
+<td><p>FFFFFF</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>11821953316814883</p></td>
+<td><p>6192453782601729</p></td>
+<td><p>31</p></td>
+<td><p>Ligne 31</p></td>
+<td><p>Ligne Ligne 31</p></td>
+<td><p>3</p></td>
+<td><p>NaN</p></td>
+<td><p>9c8cc9</p></td>
+<td><p>FFFFFF</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Les fichiers sont triés par les services circulants le jour et l’heure spécifiés.</strong> Il est possible de charger des dataframes des fichiers bruts avec la méthode <em>gtfs_feed.data()</em> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Feed</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="s2">&quot;trips&quot;</span><span class="p">)</span> <span class="c1"># renvoit le fichier brut des trips du répertoire GTFS zippé sous forme de dataframe</span>
+</pre></div>
+</div>
+<section id="obtenir-la-table-horaire-du-jour-demande-et-de-l-heure-demandee">
+<h5>Obtenir la table horaire du jour demandé et de l’heure demandée<a id="tabhor"></a><a class="headerlink" href="#obtenir-la-table-horaire-du-jour-demande-et-de-l-heure-demandee" title="Link to this heading"></a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Feed</span><span class="o">.</span><span class="n">table_horaire</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Renvoit la table horaire (passages aux arrêts) des services circulant le jour et l’heure spécifiés.</p>
+</section>
+<section id="obtenir-les-services-exceptes">
+<h5>Obtenir les services exceptés <a id="servex"></a><a class="headerlink" href="#obtenir-les-services-exceptes" title="Link to this heading"></a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">.</span><span class="n">services_exceptes</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Renvoit la liste des services exceptés issus du fichier <em>calendar_dates</em>.\</p>
+</section>
+<section id="tracer-l-evolution-journaliere-de-l-offre-heure-par-heure">
+<h5>Tracer l’évolution journalière de l’offre, heure par heure <a id="plotevol"></a><a class="headerlink" href="#tracer-l-evolution-journaliere-de-l-offre-heure-par-heure" title="Link to this heading"></a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Feed</span><span class="o">.</span><span class="n">plot_evol_journaliere</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Renvoit un graphique matplotlib avec l’évolution de l’offre d’une part sur l’ensemble du réseau et d’autre part, si spécifié, l’évolution de l’offre sur certaines lignes.\</p>
+<p>Arguments facultatifs :</p>
+<ul class="simple">
+<li><p>liste_lignes_a_tracer : <em>list()</em>. Liste des lignes que l’on souhaite observer.</p></li>
+<li><p>y_axe_2 : <em>string</em>. Nom du second axe y (à droite).</p></li>
+<li><p>y_axe_1 : <em>string</em>. Nom du premier axe y (à gauche). C’est l’évolution de l’ensemble des lignes, mais l’argument n’a pas de valeur pas défaut.</p></li>
+<li><p>titre : <em>string</em>. Titre du graphique.</p></li>
+<li><p>x_axe : <em>string</em> . Nom de l’axe des x.<br />
+Résultats:<br />
+<img alt="Sans titre" src="https://github.com/lufages/expreseau_gtfs/assets/113050391/6adf0159-db0b-4d9b-b289-35f0101806f6" /></p></li>
+</ul>
+<p>et d’autre part un ensemble de méthodes qui permettent de calculer des indicateurs de performances du réseau.</p>
+</section>
+</section>
+<section id="calculer-des-indicateurs-de-performances-du-reseau-avec-l-objet-performances">
+<h4>Calculer des indicateurs de performances du réseau avec l’objet <em>performances()</em><a class="headerlink" href="#calculer-des-indicateurs-de-performances-du-reseau-avec-l-objet-performances" title="Link to this heading"></a></h4>
+<p>Les opérations qui suivent sont basées sur l’objet <em>gtfs_feed</em> définit en amont ainsi les indicateurs seront calculés pour l’heure et le jour spécifiés dans <em>gtfs_feed</em>.</p>
+<p>On commence par créer un objet performances :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">expreseau_gtfs.performances</span> <span class="kn">import</span> <span class="n">performances</span>
+
+<span class="n">gperf</span> <span class="o">=</span> <span class="n">performances</span><span class="p">(</span><span class="n">Feed</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="obtenir-la-frequence-par-ligne-du-jour-demande">
+<h5>Obtenir la fréquence par ligne du jour demandé <a id="frligne"></a><a class="headerlink" href="#obtenir-la-frequence-par-ligne-du-jour-demande" title="Link to this heading"></a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gperf</span><span class="o">.</span><span class="n">frequence_par_ligne</span><span class="p">()</span> <span class="c1"># rappels : date_demandee=&quot;20240305&quot; et plage_horaire=[7,9]</span>
+</pre></div>
+</div>
+<p>Ce qui donne :</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>route_short_name</p></th>
+<th class="head"><p>direction_id</p></th>
+<th class="head"><p>nbtrips</p></th>
+<th class="head"><p>mean_headway</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>0.0</p></td>
+<td><p>6</p></td>
+<td><p>10.000000</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>0.0</p></td>
+<td><p>4</p></td>
+<td><p>15.000000</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>0.0</p></td>
+<td><p>4</p></td>
+<td><p>15.000000</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>0.0</p></td>
+<td><p>7</p></td>
+<td><p>8.571429</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Remarques :</strong> <em>nbtrips</em> et <em>mean_headway</em> sont respectivement le nombre de voyages moyens sur la période et la fréquence moyenne.</p>
+</section>
+</section>
+<section id="obtenir-la-frequence-par-segments">
+<h4>Obtenir la fréquence par segments <a id="frseg"></a><a class="headerlink" href="#obtenir-la-frequence-par-segments" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gperf</span><span class="o">.</span><span class="n">frequence_par_segment</span><span class="p">(</span><span class="n">coords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Renvoit un geodataframe des segments (arrêt à arrêt) avec leur fréquence moyenne et nombre de passages sur la plage horaire spécifiée.\</p>
+<p>Arguments facultatifs :</p>
+<ul class="simple">
+<li><p>coords : <em>bool</em>. Par défaut <em>False</em>. Utile uniquement lorsqu’on souhaite utiliser les fonctions de découpage automatique des lignes de la classe sections()</p></li>
+</ul>
+<p>Résultats :</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>segment</p></th>
+<th class="head text-center"><p>route_short_name</p></th>
+<th class="head text-center"><p>direction_id</p></th>
+<th class="head text-center"><p>nbtrips</p></th>
+<th class="head text-center"><p>geometry</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>3377704015495197 - 3377704015496264</p></td>
+<td class="text-center"><p>7</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>LINESTRING (3.08435 45.79290, 3.08545 45.79590)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>3377704015495198 - 3377704015495857</p></td>
+<td class="text-center"><p>7</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>LINESTRING (3.08430 45.79300, 3.08425 45.78970)</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3377704015495200 - 3377704015495637</p></td>
+<td class="text-center"><p>20</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>7</p></td>
+<td class="text-center"><p>LINESTRING (3.16119 45.79180, 3.14478 45.79260)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>etc …</p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+</tr>
+</tbody>
+</table>
+<section id="obtenir-l-amplitude-par-ligne-au-jour-demande">
+<h5>Obtenir l’amplitude par ligne au jour demandé <a id="ampligne"></a><a class="headerlink" href="#obtenir-l-amplitude-par-ligne-au-jour-demande" title="Link to this heading"></a></h5>
+<p>Renvoit un dataframe avec l’amplitude (1er départ - dernière arrivée) horaire par ligne :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gperf</span><span class="o">.</span><span class="n">amplitude_par_ligne</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="obtenir-le-traces-des-lignes">
+<h4>Obtenir le tracés des lignes <a id="trclignes"></a><a class="headerlink" href="#obtenir-le-traces-des-lignes" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gperf</span><span class="o">.</span><span class="n">traces_des_lignes</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Renvoit un geodataframe avec pour chaque trip_id une géométrie associée. <strong>La géométrie n’a pas de CRS.</strong></p>
+<p>Résultats :</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>trip_id</p></th>
+<th class="head text-center"><p>geometry</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>4503749951498677</p></td>
+<td class="text-center"><p>LINESTRING (3.05248 45.79740, 3.05255 45.79760…</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4503749951498678</p></td>
+<td class="text-center"><p>LINESTRING (3.04176 45.76570, 3.04203 45.76560…</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>4503749951498679</p></td>
+<td class="text-center"><p>LINESTRING (3.05650 45.76730, 3.05677 45.76730…</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>etc …</p></td>
+<td class="text-center"><p>…</p></td>
+</tr>
+</tbody>
+</table>
+<section id="tracer-les-lignes-avec-matplotlib-et-geopandas">
+<h5>Tracer les lignes avec <em>matplotlib</em> et <em>geopandas</em> :<a class="headerlink" href="#tracer-les-lignes-avec-matplotlib-et-geopandas" title="Link to this heading"></a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># on enregistre le gdf dans une variable et on précise le crs avec .set_crs() (ici WGS84)</span>
+<span class="n">geo_lignes</span> <span class="o">=</span> <span class="n">gperf</span><span class="o">.</span><span class="n">traces_des_lignes</span><span class="p">()</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="s2">&quot;epsg:4326&quot;</span><span class="p">)</span>
+<span class="c1"># on charge les trips et routes pour récupérer le nom des lignes :</span>
+<span class="n">trips</span> <span class="o">=</span> <span class="n">Feed</span><span class="o">.</span><span class="n">trips</span>
+<span class="n">routes</span> <span class="o">=</span> <span class="n">Feed</span><span class="o">.</span><span class="n">routes</span>
+<span class="c1"># on fusionne les fichiers pour obtenir une table des correspondances entre trip_id et route_short_name :</span>
+<span class="n">trips_routes</span> <span class="o">=</span> <span class="n">trips</span><span class="p">[[</span><span class="s1">&#39;trip_id&#39;</span><span class="p">,</span> <span class="s1">&#39;route_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">routes</span><span class="p">[[</span><span class="s2">&quot;route_id&quot;</span><span class="p">,</span> <span class="s2">&quot;route_short_name&quot;</span><span class="p">,</span> <span class="s2">&quot;route_color&quot;</span><span class="p">]],</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">&#39;route_id&#39;</span><span class="p">)</span>
+<span class="c1"># on fusionne avec le gdf des lignes :</span>
+<span class="n">geo_lignes</span> <span class="o">=</span> <span class="n">geo_lignes</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">trips_routes</span><span class="p">[[</span><span class="s2">&quot;trip_id&quot;</span><span class="p">,</span> <span class="s2">&quot;route_short_name&quot;</span><span class="p">,</span> <span class="s2">&quot;route_color&quot;</span><span class="p">]],</span> <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;trip_id&quot;</span><span class="p">)</span>
+<span class="n">geo_lignes</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="Sans titre" src="https://github.com/lufages/expreseau_gtfs/assets/113050391/1aeb9cba-8793-477e-8e47-e40273134348" /></p>
+</section>
+</section>
+<section id="obtenir-la-frequence-par-shape">
+<h4>Obtenir la fréquence par <em>shape</em> <a id="frshp"></a><a class="headerlink" href="#obtenir-la-frequence-par-shape" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gperf</span><span class="o">.</span><span class="n">frequence_par_shapes</span><span class="p">(</span><span class="n">stop_sequence</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Renvoit un geodataframe avec pour chaque trip_id une géométrie associée. <strong>La géométrie n’a pas de CRS.</strong><br />
+Arguments obligatoires :</p>
+<ul class="simple">
+<li><p>date_demandee : <em>string</em> au format ‘yyyymmdd’</p></li>
+<li><p>plage_horaire : liste de <em>int</em> spécifiant un intervalle fermé des heures définissant la plage.<br />
+Arguments facultatifs :</p></li>
+<li><p>stop_sequence : <em>int</em>. Par défaut on calcule la fréquence à partir de la fréquence de passage à l’arrêt numéroté 1. Attention cette méthode n’est pas idéale dans le cas où la fréquence varie selon le tronçon de ligne concerné. Le cas échéant, il sera nécessaire d’utiliser les méthodes de la classe sections().</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># on charge la fréquence par shape :</span>
+<span class="n">fsh</span> <span class="o">=</span> <span class="n">gperf</span><span class="o">.</span><span class="n">frequence_par_shapes</span><span class="p">()</span>
+<span class="c1"># on fusionne avec le gdf des shapes créé en amont :</span>
+<span class="n">geo_lignes_fsh</span> <span class="o">=</span> <span class="n">geo_lignes</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">fsh</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;shape_id&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On trace la fréquence moyenne par shape :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">geo_lignes_fsh</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;mean_headway&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span>\
+<span class="n">plot</span><span class="p">(</span><span class="n">column</span> <span class="o">=</span> <span class="s2">&quot;mean_headway&quot;</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;viridis&quot;</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">scheme</span> <span class="o">=</span> <span class="s2">&quot;natural_breaks&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="Sans titre" src="https://github.com/lufages/expreseau_gtfs/assets/113050391/48f3a6d2-6371-400c-8a95-1fdf4a354826" /></p>
+</section>
+</section>
+<section id="pour-un-usage-avance">
+<h3>Pour un usage avancé <a id="usaavance"></a><a class="headerlink" href="#pour-un-usage-avance" title="Link to this heading"></a></h3>
+<section id="decoupage-de-ligne-par-troncons">
+<h4>Découpage de ligne par tronçons <a id="decoupauto"></a><a class="headerlink" href="#decoupage-de-ligne-par-troncons" title="Link to this heading"></a></h4>
+<p>Le calcul d’indicateurs de fréquences ou de services peut s’avérer aberrant lorsque sur une ligne de transports on trouve des différences d’offre de service selon l’arrêt, l’heure ou les deux.
+C’est souvent le cas sur certaines lignes de tramways, où, passé un certain arrêt, l’offre diminue. On trouve ces configurations lorsque le tramway arrive en périphérie.</p>
+<section id="creer-un-objet-sections">
+<h5>Créer un objet sections() <a id="objsections"></a><a class="headerlink" href="#creer-un-objet-sections" title="Link to this heading"></a></h5>
+<p>L’objet <em>sections()</em> a besoin d’une table des fréquences par segments en attribut (voir <em>performances().frequences_par_segments()</em>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">expreseau_gtfs.sections</span> <span class="kn">import</span> <span class="n">sections</span>
+<span class="n">gf</span> <span class="o">=</span> <span class="n">sections</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">frsegln</span> <span class="o">=</span> <span class="n">frseg</span><span class="p">[(</span><span class="n">frseg</span><span class="o">.</span><span class="n">route_short_name</span> <span class="o">==</span> <span class="s2">&quot;13&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">frseg</span><span class="o">.</span><span class="n">direction_id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span>
+
+<span class="n">gs</span> <span class="o">=</span> <span class="n">sections</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">frsegln</span><span class="p">)</span>
+
+<span class="n">sst</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">stops</span>
+<span class="n">sst</span><span class="o">.</span><span class="n">stop_id</span> <span class="o">=</span> <span class="n">sst</span><span class="o">.</span><span class="n">stop_id</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">gda</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">decoupe_auto</span><span class="p">(</span><span class="n">stops</span><span class="o">=</span><span class="n">sst</span><span class="p">,</span> <span class="n">temps</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span> <span class="n">coef</span> <span class="o">=</span> <span class="mf">1.6</span><span class="p">)</span>
+<span class="n">gda</span>
+
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>nb_trips</p></th>
+<th class="head"><p>geometry</p></th>
+<th class="head"><p>stop_name_dep</p></th>
+<th class="head"><p>stop_id_dep</p></th>
+<th class="head"><p>stop_name_arr</p></th>
+<th class="head"><p>stop_id_arr</p></th>
+<th class="head"><p>part d’offre</p></th>
+<th class="head"><p>frequence horaire moyenne (min)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>5.9</p></td>
+<td><p>MULTILINESTRING ((3.05318 45.78220, 3.05052 45…</p></td>
+<td><p>Hauts de Chamalières</p></td>
+<td><p>3377704015495701</p></td>
+<td><p>Margeride</p></td>
+<td><p>3377704015495862</p></td>
+<td><p>100.00</p></td>
+<td><p>20.34</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0</p></td>
+<td><p>MULTILINESTRING ((3.12024 45.76110, 3.12578 45…</p></td>
+<td><p>Margeride</p></td>
+<td><p>3377704015495862</p></td>
+<td><p>La Pardieu Gare</p></td>
+<td><p>3377850044383332</p></td>
+<td><p>16.95</p></td>
+<td><p>120.00</p></td>
+</tr>
+<tr class="row-even"><td><p>2.8</p></td>
+<td><p>MULTILINESTRING ((3.12024 45.76110, 3.12812 45…</p></td>
+<td><p>Margeride</p></td>
+<td><p>3377704015495862</p></td>
+<td><p>PERIGNAT Les Horts</p></td>
+<td><p>3377704015495786</p></td>
+<td><p>47.46</p></td>
+<td><p>42.86</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gda</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span> <span class="o">=</span> <span class="s2">&quot;frequence horaire moyenne (min)&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scheme</span> <span class="o">=</span> <span class="s2">&quot;natural_breaks&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="Sans titre" src="https://github.com/lufages/expreseau_gtfs/assets/113050391/5c46d865-d99c-44d2-8de0-c155e5c9c29f" /></p>
+</section>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="expreseau_gtfs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Lucas FAGES.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
