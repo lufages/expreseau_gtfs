@@ -65,5 +65,5 @@ Module utils
 
 Quickstart
 ----------
-.. include:: QUICKSTART.md
-    :parser: myst_parser.sphinx_
+    QUICKSTART
+
