@@ -1,8 +1,0 @@
-numpy
-pandas
-geopandas
-networkx
-datetime
-shapely
-seaborn
-matplotlib
