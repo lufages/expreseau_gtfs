@@ -1,0 +1,12 @@
+numpy
+pandas
+geopandas
+networkx
+datetime
+shapely
+seaborn
+matplotlib
+tqdm
+scikit-learn
+requests
+pyproj

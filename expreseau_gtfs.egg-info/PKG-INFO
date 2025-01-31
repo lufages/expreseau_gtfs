@@ -1,0 +1,14 @@
+Metadata-Version: 1.2
+Name: expreseau-gtfs
+Version: 0.1
+Summary: UNKNOWN
+Home-page: https://github.com/lufages/expreseau_gtfs/tree/main
+Author: lucas fages
+Author-email: lucas.fages@cnrs.fr
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: License :: Free For Educational Use
+Requires-Python: >=3
